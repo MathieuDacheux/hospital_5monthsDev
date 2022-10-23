@@ -1,4 +1,4 @@
 <?php
 
-    header('Location: ./controllers/addPatientsController.php');
+    header('Location: /accueil');
     exit();

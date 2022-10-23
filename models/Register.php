@@ -3,19 +3,21 @@
 class RegisterPatient extends Database {
 
     // Propriétés
-    protected $firstname;
-    protected $lastname;
-    protected $birthdate;
-    protected $phone;
-    protected $mail;
+    private $firstname;
+    private $lastname;
+    private $birthdate;
+    private $phone;
+    private $mail;
+    private $gender;
 
-    public function __construct($firstname, $lastname, $birthdate, $phone, $mail) {
+    public function __construct($firstname, $lastname, $birthdate, $phone, $mail, $gender) {
         parent::__construct();
         $this->firstname = trim(filter_input(INPUT_POST, $firstname, FILTER_SANITIZE_SPECIAL_CHARS));
         $this->lastname = trim(filter_input(INPUT_POST, $lastname, FILTER_SANITIZE_SPECIAL_CHARS));
         $this->birthdate = trim(filter_input(INPUT_POST, $birthdate, FILTER_SANITIZE_SPECIAL_CHARS));
         $this->phone = trim(filter_input(INPUT_POST, $phone, FILTER_SANITIZE_SPECIAL_CHARS));
         $this->mail = trim(filter_input(INPUT_POST, $mail, FILTER_SANITIZE_SPECIAL_CHARS));
+        $this->gender = trim(filter_input(INPUT_POST, $gender, FILTER_SANITIZE_SPECIAL_CHARS));
     }
 
     /**
@@ -58,6 +60,13 @@ class RegisterPatient extends Database {
         return $this->mail;
     }
 
+    /**
+     * Retourne le genre du patient
+     * @return string
+     */
+    public function getGender() :string {
+        return $this->gender;
+    }
 
     /**
      * Validation des inputs envoyés via le formulaire
@@ -87,12 +96,13 @@ class RegisterPatient extends Database {
      * @return bool
      */
     public function addPatient($databaseConnection) :bool {
-        $query = $databaseConnection->prepare('INSERT INTO `patients` (lastname, firstname, birthdate, phone, mail) VALUES (:lastname, :firstname, :birthdate, :phone, :mail)');
+        $query = $databaseConnection->prepare('INSERT INTO `patients` (lastname, firstname, birthdate, phone, mail, gender) VALUES (:lastname, :firstname, :birthdate, :phone, :mail, :gender)');
         $query->bindValue(':lastname', $this->getLastName(), PDO::PARAM_STR);
         $query->bindValue(':firstname', $this->getFirstName(), PDO::PARAM_STR);
         $query->bindValue(':birthdate', $this->getBirthDate(), PDO::PARAM_STR);
         $query->bindValue(':phone', $this->getPhone(), PDO::PARAM_STR);
         $query->bindValue(':mail', $this->getMail(), PDO::PARAM_STR);
+        $query->bindValue(':gender', $this->getGender(), PDO::PARAM_STR);
         $result = $query->execute();
         if ($result) {
             return true;

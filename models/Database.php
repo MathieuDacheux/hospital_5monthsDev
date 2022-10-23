@@ -3,11 +3,11 @@
 class Database {
 
     public function __construct() {
-        $this->database = 'hospitalE2N';
-        $this->host = 'localhost';
-        $this->user = 'root';
-        $this->password = 'root';
-        $this->charset = 'utf8';
+        $this->database = DATABASE;
+        $this->host = HOST;
+        $this->user = USER;
+        $this->password = PASSWORD;
+        $this->charset = CHARSET;
     }
 
     /**
