@@ -15,7 +15,7 @@ $title = HEAD_TITLE[0];
 $description = HEAD_DESCRIPTION[0];
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $register = new Register('firstName', 'lastName', 'birthDate', 'phone', 'mail');
+    $register = new RegisterPatient('firstName', 'lastName', 'birthDate', 'phone', 'mail');
     if ($register->validationInput($register->getFirstName(), REGEX_NAME) == true && $register->validationInput($register->getLastName(), REGEX_NAME) == true && $register->validationInput($register->getBirthDate(), REGEX_BIRTHDATE) == true && $register->validationInput($register->getPhone(), REGEX_PHONE) == true && $register->validationInput($register->getMail(), REGEX_MAIL) == true) {
         $register->checkPatient();
     } else {

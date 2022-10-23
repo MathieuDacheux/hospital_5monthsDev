@@ -1,6 +1,6 @@
 <?php
 
-class Register extends Database {
+class RegisterPatient extends Database {
 
     // Propriétés
     protected $firstname;
