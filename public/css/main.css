@@ -1,0 +1,107 @@
+/*********************** ************************/
+/**************** GLOBAL SETTINGS ***************/
+/*********************** ************************/
+
+:root {
+
+    /* Primary Color */
+
+
+    /* Base Color */
+
+
+    /* Accent Color */
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+
+}
+
+/*********************** ************************/
+/****************** FONT SETTINGS ***************/
+/*********************** ************************/
+
+h1 {
+
+}
+
+h2 {
+    
+}
+
+h3 {
+    
+}
+
+h4 {
+    
+}
+
+p {
+    
+}
+
+a {
+    
+}
+
+/*********************** ************************/
+/***************** MARGIN PADDING ***************/
+/*********************** ************************/
+
+section {
+
+}
+
+/*********************** ************************/
+/****************** FLEX SETTINGS ***************/
+/*********************** ************************/
+
+.flexCenterVertical {
+    display: flex;
+    align-items: center;
+}
+
+.flexCenterHorizontal {
+    display: flex;
+    justify-content: center;
+}
+
+.flexCenterColumn {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.flexCenterCenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flexCenterCenterColumn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.flexCenterAround {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.flexCenterBetween {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
