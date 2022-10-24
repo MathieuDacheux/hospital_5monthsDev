@@ -51,6 +51,26 @@ class Database {
     }
 
     /**
+     * Validation des inputs soumis en méthode GET ou POST
+     * @param mixed $input
+     * @param mixed $REGEX
+     * 
+     * @return bool
+     */
+    public static function validationInput ($input, $REGEX) :bool {
+        if(empty($input)) {
+            return false;
+        } else {
+            $isOk = filter_var($input, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => $REGEX)));
+            if (!$isOk) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+
+    /**
      * Retourne la connexion à la base de données
      * @return PDO
      */

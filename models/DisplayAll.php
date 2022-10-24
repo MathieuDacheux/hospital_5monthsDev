@@ -1,18 +1,21 @@
 <?php
 
-class DisplayAll extends Database {
+class DisplayInformations extends Database {
+    
+    private $table;
 
-    public function __construct() {
+    public function __construct ($table) {
         parent::__construct();
         $this->numberPerPage = 10;
         $this->page = 1;
+        $this->$table = $table;
     }
 
     /**
      * Retourne le nombre d'éléments par page
      * @return int
      */
-    public function getNumberPerPage() :int {
+    public function getNumberPerPage () :int {
         return $this->numberPerPage;
     }
 
@@ -20,22 +23,29 @@ class DisplayAll extends Database {
      * Retourne la page actuelle
      * @return int
      */
-    public function getPage() :int {
+    public function getPage () :int {
         return $this->page;
+    }
+
+    /**
+     * Retourne le nombre de la table a traiter
+     * @return string
+     */
+    public function getTable ()  {
+        return $this->table;
     }
 
     /**
      * Settings d'une nouvelle valeur pour page
      * @return int
      */
-    public function setPage() :int {
+    public function setPage () :int {
         if (isset($_GET['page'])) {
             $input = filter_input(INPUT_GET , 'page', FILTER_SANITIZE_NUMBER_INT);
-            $isOk = filter_var($input, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => REGEX_PAGE)));
-            if (!$isOk) {
-                $this->page = 1;
-            } else {
+            if (parent::validationInput($input, REGEX_PAGE) == true) {
                 $this->page = $input;
+            } else {
+                $this->page = 1;
             }
         } else {
             $this->page = 1;
@@ -47,15 +57,19 @@ class DisplayAll extends Database {
      * Retourne le nombre total de patients
      * @return int
      */
-    public function howManyPages() :int {
+    public function howManyPages () :int {
         // Connexion à la base de données
         $databaseConnection = parent::getPDO();
         // Requête SQL
-        $result = $databaseConnection->query('SELECT COUNT(`id`) AS total FROM `patients`');
+        $result = $databaseConnection->prepare('SELECT COUNT(`id`) FROM :table ;');
+        $result->bindValue(':table', $this->getTable(), PDO::PARAM_STR);
         // Récupération du résultat
         $resultTotal = $result->fetch(PDO::FETCH_OBJ);
-        // Calcul du nombre de pages
-        $totalPages = intdiv($resultTotal->total, $this->getNumberPerPage());
+        if ($resultTotal > 10) {
+            $totalPages = intdiv($resultTotal->total, $this->getNumberPerPage());
+        } else {
+            $totalPages = 1;
+        }
         return $totalPages;
     }
 
@@ -63,11 +77,12 @@ class DisplayAll extends Database {
      * Retourne la liste des patients par page
      * @return array
      */
-    public function getPatientsList() :array {
+    public function getByTen () :array {
         // Connexion à la base de données
         $databaseConnection = parent::getPDO();
         // Requête SQL
-        $query = $databaseConnection->prepare('SELECT * FROM `patients` ORDER BY `lastname` ASC LIMIT :numberPerPage OFFSET :offset');
+        $query = $databaseConnection->prepare('SELECT * FROM :table ORDER BY `id` ASC LIMIT :numberPerPage OFFSET :offset');
+        $query->bindValue(':table', $this->getTable(), PDO::PARAM_STR);
         $query->bindValue(':numberPerPage', $this->getNumberPerPage(), PDO::PARAM_INT);
         $query->bindValue(':offset', ($this->getPage() - 1) * $this->getNumberPerPage(), PDO::PARAM_INT);
         $query->execute();

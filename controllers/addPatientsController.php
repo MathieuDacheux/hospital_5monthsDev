@@ -17,17 +17,22 @@ $description = HEAD_DESCRIPTION[0];
 $style = whichCSS();
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Instanciation de la classe RegisterPatient
     $register = new RegisterPatient('firstName', 'lastName', 'birthDate', 'phone', 'mail', 'gender');
+    // Validation des inputs soumis en méthode POST
     if ($register->validationInput($register->getFirstName(), REGEX_NAME) == true && 
     $register->validationInput($register->getLastName(), REGEX_NAME) == true && 
     $register->validationInput($register->getBirthDate(), REGEX_BIRTHDATE) == true && 
     $register->validationInput($register->getPhone(), REGEX_PHONE) == true && 
     $register->validationInput($register->getMail(), REGEX_MAIL) == true && 
     $register->validationInput($register->getGender(), REGEX_GENDER) == true) {
+        // Ajout du patient dans la base de données
         $register->checkPatient();
+        // Affichage du message de succès
+        $confirmation = 'Le patient a bien été ajouté';
     } else {
+        // Affichage du message d'erreur
         $error = 'Veuillez remplir correctement le formulaire';
-        echo $error;
     }
 }
 

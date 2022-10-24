@@ -69,34 +69,13 @@ class RegisterPatient extends Database {
     }
 
     /**
-     * Validation des inputs envoyés via le formulaire
-     * @param mixed $input
-     * @param mixed $REGEX
-     * 
-     * @return bool
-     */
-    public function validationInput ($input, $REGEX) :bool {
-        if(empty($input)) {
-            return false;
-        } else {
-            $isOk = filter_var($input, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => $REGEX)));
-            if (!$isOk) {
-                return false;
-            } else {
-                return true;
-            }
-        }
-    }
-
-    
-    /**
      * Ajout d'un patient dans la base de données
      * @param mixed $databaseConnection
      * 
      * @return bool
      */
     public function addPatient($databaseConnection) :bool {
-        $query = $databaseConnection->prepare('INSERT INTO `patients` (lastname, firstname, birthdate, phone, mail, gender) VALUES (:lastname, :firstname, :birthdate, :phone, :mail, :gender);');
+        $query = $databaseConnection->prepare('INSERT INTO `patients` (`lastname`, `firstname`, `birthdate`, `phone`, `mail`, `gender`) VALUES (:lastname, :firstname, :birthdate, :phone, :mail, :gender) ;');
         $query->bindValue(':lastname', $this->getLastName(), PDO::PARAM_STR);
         $query->bindValue(':firstname', $this->getFirstName(), PDO::PARAM_STR);
         $query->bindValue(':birthdate', $this->getBirthDate(), PDO::PARAM_STR);
@@ -104,7 +83,7 @@ class RegisterPatient extends Database {
         $query->bindValue(':mail', $this->getMail(), PDO::PARAM_STR);
         $query->bindValue(':gender', $this->getGender(), PDO::PARAM_STR);
         $result = $query->execute();
-        if ($result) {
+        if ($result == true) {
             return true;
         } else {
             return false;
@@ -117,9 +96,9 @@ class RegisterPatient extends Database {
      */
     public function checkPatient() :bool {
         $databaseConnection = parent::getPDO();
-        $query = $databaseConnection->prepare('SELECT * FROM patients WHERE lastname = '.$this->getLastName().' AND firstname = '.$this->getFirstName().' AND birthdate = '.$this->getBirthDate());
+        $query = $databaseConnection->prepare('SELECT * FROM `patients` WHERE lastname = '.$this->getLastName().' AND firstname = '.$this->getFirstName().' AND birthdate = '.$this->getBirthDate());
         $result = $query->fetch(PDO::FETCH_OBJ);
-        if ($result == []) {
+        if ($result != null) {
             return true;
         } else {
             $this->addPatient($databaseConnection);

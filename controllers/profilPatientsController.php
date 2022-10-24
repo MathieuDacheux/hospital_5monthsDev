@@ -7,7 +7,7 @@ require_once(__DIR__.'/../helpers/functions.php');
 
 // Appel des models
 require_once(__DIR__.'/../models/Database.php');
-require_once(__DIR__.'/../models/Profil.php');
+require_once(__DIR__.'/../models/displaySpecific.php');
 
 // Appel des fonctions
 
@@ -16,7 +16,7 @@ $title = HEAD_TITLE[2];
 $description = HEAD_DESCRIPTION[2];
 
 // Instanciation de la classe Profil
-$profil = new Profil();
+$profil = new DisplaySpecific();
 
 // Filtrage de l'ID reçu en GET
 if ($profil->verifyIfIdExists() == true) {

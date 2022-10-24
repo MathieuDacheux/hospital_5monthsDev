@@ -11,9 +11,9 @@
             <select name="gender" id="gender">
                 <option value="1">Homme</option>
                 <option value="2">Femme</option>
-                <option value="3">Autres</option>
             </select>
             <button>SUBMIT</button>
+            <p><?= (isset($confirmation)) ? $confirmation : $error ?></p>
         </form>
     </div>
 </main>

@@ -6,6 +6,10 @@ class DisplaySpecific extends Database {
     public function __construct () {
         parent::__construct();
         $this->id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $this->phone = trim(filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_SPECIAL_CHARS));
+            $this->mail = trim(filter_input(INPUT_POST, 'mail', FILTER_SANITIZE_EMAIL));
+        }
     }
 
     /**
@@ -17,23 +21,19 @@ class DisplaySpecific extends Database {
     }
 
     /**
-     * Validation des inputs
-     * @param mixed $input
-     * @param mixed $REGEX
-     * 
-     * @return bool
+     * Retourne le nouveau numéro de téléphone du patient
+     * @return string
      */
-    public function validationInput ($input, $REGEX) :bool {
-        if(empty($input)) {
-            return false;
-        } else {
-            $isOk = filter_var($input, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => $REGEX)));
-            if (!$isOk) {
-                return false;
-            } else {
-                return true;
-            }
-        }
+    public function getPhone () :string {
+        return $this->phone;
+    }
+
+    /**
+     * Retourne la nouvelle email du patient
+     * @return string
+     */
+    public function getMail () :string {
+        return $this->mail;
     }
 
     /**
@@ -78,7 +78,7 @@ class DisplaySpecific extends Database {
         // Connexion à la base de données
         $databaseConnection = parent::getPDO();
         // Requête SQL
-        $result = $databaseConnection->query('UPDATE `patients` SET `phone` = "'.$_POST['phone'].'", `mail` = "'.$_POST['mail'].'" WHERE `id` = '.$this->getId());
+        $result = $databaseConnection->query('UPDATE `patients` SET `phone` = "'.$this->getPhone().'", `mail` = "'.$this->getMail().'" WHERE `id` = '.$this->getId());
         // Récupération du résultat
         $resultInformations = $result->fetch(PDO::FETCH_OBJ);
         return $resultInformations;

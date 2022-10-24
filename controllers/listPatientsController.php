@@ -14,15 +14,16 @@ require_once(__DIR__.'/../models/DisplayAll.php');
 // Variables
 $title = HEAD_TITLE[1];
 $description = HEAD_DESCRIPTION[1];
+$table = 'patients';
 
 // Instanciation de la classe DisplayList
-$displayPatient = new DisplayAll();
+$displayPatient = new DisplayInformations($table);
 // Récupération du nombre de pages
 $totalPages = $displayPatient->howManyPages();
 // Récupération de la page actuelle
 $page = $displayPatient->setPage();
 // Récupération de la liste des patients
-$patientsList = $displayPatient->getPatientsList();
+$patientsList = $displayPatient->getByTen();
 
 // Appel des vues
 include(__DIR__.'/../views/templates/header.php');
