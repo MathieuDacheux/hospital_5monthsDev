@@ -14,7 +14,7 @@ class Database {
      * Retourne le nom de la base de données
      * @return string
      */
-    public function getDatabase(): string {
+    public function getDatabase() :string {
         return $this->database;
     }
 
@@ -22,7 +22,7 @@ class Database {
      * Retourne l'host de la base de données
      * @return string
      */
-    public function getHost(): string {
+    public function getHost() :string {
         return $this->host;
     }
 
@@ -30,7 +30,7 @@ class Database {
      * Retourne le nom d'utilisateur de la base de données
      * @return string
      */
-    public function getUser(): string {
+    public function getUser() :string {
         return $this->user;
     }
 
@@ -38,7 +38,7 @@ class Database {
      * Retourne le mot de passe de la base de données
      * @return string
      */
-    public function getPassword(): string {
+    public function getPassword() :string {
         return $this->password;
     }
 
@@ -46,7 +46,7 @@ class Database {
      * Retourne le charset de la base de données
      * @return string
      */
-    public function getCharset(): string {
+    public function getCharset() :string {
         return $this->charset;
     }
 
@@ -55,7 +55,11 @@ class Database {
      * @return PDO
      */
     public function getPDO(): PDO {
-        $connectionDatabase = new PDO('mysql:dbname=' . $this->getDatabase() . ';host=' . $this->getHost() . ';charset=' . $this->getCharset(), $this->getUser(), $this->getPassword());
-        return $connectionDatabase;
+        try {
+            $connectionDatabase = new PDO('mysql:host=' . $this->getHost() . ';dbname=' . $this->getDatabase() . ';charset=' . $this->getCharset(), $this->getUser(), $this->getPassword());
+            return $connectionDatabase;
+        } catch (PDOException $ex) {
+            die('Erreur : ' . $ex->getMessage());
+        }
     }
 }

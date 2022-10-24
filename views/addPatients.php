@@ -6,7 +6,7 @@
             <input type="text" name="lastName" id="lastName" placeholder="Nom">
             <input type="text" name="firstName" id="firstName" placeholder="Prénom">
             <input type="date" name="birthDate" id="birthDate" placeholder="Date">
-            <input type="text" name="phone" id="phone" placeholder="Numéro">
+            <input type="tel" name="phone" id="phone" placeholder="Numéro">
             <input type="text" name="mail" id="mail" placeholder="Mail">
             <select name="gender" id="gender">
                 <option value="1">Homme</option>

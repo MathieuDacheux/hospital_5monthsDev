@@ -7,7 +7,7 @@ require_once(__DIR__.'/../helpers/functions.php');
 
 // Appel des models
 require_once(__DIR__.'/../models/Database.php');
-require_once(__DIR__.'/../models/Register.php');
+require_once(__DIR__.'/../models/RegisterPatient.php');
 
 // Appel des fonctions
 

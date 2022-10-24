@@ -16,8 +16,8 @@ class RegisterPatient extends Database {
         $this->lastname = trim(filter_input(INPUT_POST, $lastname, FILTER_SANITIZE_SPECIAL_CHARS));
         $this->birthdate = trim(filter_input(INPUT_POST, $birthdate, FILTER_SANITIZE_SPECIAL_CHARS));
         $this->phone = trim(filter_input(INPUT_POST, $phone, FILTER_SANITIZE_SPECIAL_CHARS));
-        $this->mail = trim(filter_input(INPUT_POST, $mail, FILTER_SANITIZE_SPECIAL_CHARS));
-        $this->gender = trim(filter_input(INPUT_POST, $gender, FILTER_SANITIZE_SPECIAL_CHARS));
+        $this->mail = trim(filter_input(INPUT_POST, $mail, FILTER_SANITIZE_EMAIL));
+        $this->gender = trim(filter_input(INPUT_POST, $gender, FILTER_SANITIZE_NUMBER_INT));
     }
 
     /**
