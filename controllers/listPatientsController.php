@@ -7,7 +7,7 @@ require_once(__DIR__.'/../helpers/functions.php');
 
 // Appel des models
 require_once(__DIR__.'/../models/Database.php');
-require_once(__DIR__.'/../models/DisplayList.php');
+require_once(__DIR__.'/../models/DisplayAll.php');
 
 // Appel des fonctions
 
@@ -16,7 +16,7 @@ $title = HEAD_TITLE[1];
 $description = HEAD_DESCRIPTION[1];
 
 // Instanciation de la classe DisplayList
-$displayPatient = new DisplayPatient();
+$displayPatient = new DisplayAll();
 // Récupération du nombre de pages
 $totalPages = $displayPatient->howManyPages();
 // Récupération de la page actuelle

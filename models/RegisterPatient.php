@@ -96,7 +96,7 @@ class RegisterPatient extends Database {
      * @return bool
      */
     public function addPatient($databaseConnection) :bool {
-        $query = $databaseConnection->prepare('INSERT INTO `patients` (lastname, firstname, birthdate, phone, mail, gender) VALUES (:lastname, :firstname, :birthdate, :phone, :mail, :gender)');
+        $query = $databaseConnection->prepare('INSERT INTO `patients` (lastname, firstname, birthdate, phone, mail, gender) VALUES (:lastname, :firstname, :birthdate, :phone, :mail, :gender);');
         $query->bindValue(':lastname', $this->getLastName(), PDO::PARAM_STR);
         $query->bindValue(':firstname', $this->getFirstName(), PDO::PARAM_STR);
         $query->bindValue(':birthdate', $this->getBirthDate(), PDO::PARAM_STR);

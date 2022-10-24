@@ -1,6 +1,6 @@
 <?php
 
-class Profil extends Database {
+class DisplaySpecific extends Database {
     private $id;
 
     public function __construct () {
@@ -36,6 +36,10 @@ class Profil extends Database {
         }
     }
 
+    /**
+     * Vérifie si l'ID du patient existe
+     * @return bool
+     */
     public function verifyIfIdExists () :bool {
         if ($this->validationInput($this->getId(), REGEX_ID) == true) {
             $databaseConnection = parent::getPDO();
@@ -66,7 +70,11 @@ class Profil extends Database {
         return $resultInformations;
     }
 
-    public function modifyInformation () {
+    /**
+     * Update des informations du patient
+     * @return bool
+     */
+    public function modifyInformation () :bool {
         // Connexion à la base de données
         $databaseConnection = parent::getPDO();
         // Requête SQL

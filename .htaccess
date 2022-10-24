@@ -3,3 +3,4 @@ RewriteEngine On
 RewriteRule ^accueil$ controllers/addPatientsController.php
 RewriteRule ^patients controllers/listPatientsController.php
 RewriteRule ^profil controllers/profilPatientsController.php
+RewriteRule ^rendez_vous$ controllers/addAppointementController.php
