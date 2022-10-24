@@ -3,7 +3,7 @@
 class Profil extends Database {
     private $id;
 
-    public function __construct() {
+    public function __construct () {
         parent::__construct();
         $this->id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
     }
@@ -12,8 +12,8 @@ class Profil extends Database {
      * Retourne l'ID du patient
      * @return int
      */
-    public function getId() :int {
-        return $this->id;
+    public function getId () :int {
+        return intval($this->id, 10);
     }
 
     /**
@@ -36,8 +36,19 @@ class Profil extends Database {
         }
     }
 
-    public function verifyIfIDExists() {
-        if (validationInput($this->id, REGEX_ID) == true) {
+    public function verifyIfIdExists () :bool {
+        if ($this->validationInput($this->getId(), REGEX_ID) == true) {
+            $databaseConnection = parent::getPDO();
+            $queryResult = $databaseConnection->prepare('SELECT `id` FROM `patients` WHERE `id` = '.$this->getId().' ;');
+            $queryResult->execute();
+            $result = $queryResult->fetch(PDO::FETCH_OBJ);
+            if ($result != null) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
         }
     }
 

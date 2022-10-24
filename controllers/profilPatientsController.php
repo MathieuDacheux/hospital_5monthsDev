@@ -19,13 +19,14 @@ $description = HEAD_DESCRIPTION[2];
 $profil = new Profil();
 
 // Filtrage de l'ID reçu en GET
-if ($profil->validationInput($profil->getId(), REGEX_ID) == true) {
+if ($profil->verifyIfIdExists() == true) {
     // Si la donnée est valide, récupération des informations du patient
     $patient = $profil->patientInformations();
     // Si le formulaire est soumis
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($profil->validationInput($_POST['phone'], REGEX_PHONE) == true &&
         $profil->validationInput($_POST['mail'], REGEX_MAIL) == true) {
+            // Modification des informations du patient
             $profil->modifyInformation();
             // Redirection vers la page de profil du patient
             header('Location: /profil?id='.$profil->getId());
