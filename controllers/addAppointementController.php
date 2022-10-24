@@ -20,7 +20,7 @@ $description = HEAD_DESCRIPTION[3];
 $displayPatient = new DisplayAll();
 
 // Récupération des patients
-$patientsList = $displayPatient->getAllPatients();
+$patientsList = $displayPatient->getAll();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Instanciation de la classe RegisterAppointement

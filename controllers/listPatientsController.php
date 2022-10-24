@@ -14,16 +14,18 @@ require_once(__DIR__.'/../models/DisplayAll.php');
 // Variables
 $title = HEAD_TITLE[1];
 $description = HEAD_DESCRIPTION[1];
-$table = 'patients';
+
+$howManyPagesRequest = 'SELECT COUNT(`id`) as total FROM `patients` ;';
+$getByTenRequest = 'SELECT * FROM `patients` ORDER BY `id` ASC LIMIT :numberPerPage OFFSET :offset';
 
 // Instanciation de la classe DisplayList
-$displayPatient = new DisplayInformations($table);
+$displayPatient = new DisplayAll();
 // Récupération du nombre de pages
-$totalPages = $displayPatient->howManyPages();
+$totalPages = $displayPatient->howManyPages($howManyPagesRequest);
 // Récupération de la page actuelle
 $page = $displayPatient->setPage();
 // Récupération de la liste des patients
-$patientsList = $displayPatient->getByTen();
+$patientsList = $displayPatient->getByTen($getByTenRequest);
 
 // Appel des vues
 include(__DIR__.'/../views/templates/header.php');

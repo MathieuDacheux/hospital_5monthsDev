@@ -1,14 +1,11 @@
 <?php
 
-class DisplayInformations extends Database {
-    
-    private $table;
+class DisplayAll extends Database {
 
-    public function __construct ($table) {
+    public function __construct () {
         parent::__construct();
         $this->numberPerPage = 10;
         $this->page = 1;
-        $this->$table = $table;
     }
 
     /**
@@ -19,20 +16,8 @@ class DisplayInformations extends Database {
         return $this->numberPerPage;
     }
 
-    /**
-     * Retourne la page actuelle
-     * @return int
-     */
     public function getPage () :int {
         return $this->page;
-    }
-
-    /**
-     * Retourne le nombre de la table a traiter
-     * @return string
-     */
-    public function getTable ()  {
-        return $this->table;
     }
 
     /**
@@ -57,19 +42,15 @@ class DisplayInformations extends Database {
      * Retourne le nombre total de patients
      * @return int
      */
-    public function howManyPages () :int {
+    public function howManyPages ($requestSQL) :int {
         // Connexion à la base de données
         $databaseConnection = parent::getPDO();
         // Requête SQL
-        $result = $databaseConnection->prepare('SELECT COUNT(`id`) FROM :table ;');
-        $result->bindValue(':table', $this->getTable(), PDO::PARAM_STR);
+        $result = $databaseConnection->prepare($requestSQL);
+        $result->execute();
         // Récupération du résultat
         $resultTotal = $result->fetch(PDO::FETCH_OBJ);
-        if ($resultTotal > 10) {
-            $totalPages = intdiv($resultTotal->total, $this->getNumberPerPage());
-        } else {
-            $totalPages = 1;
-        }
+        $totalPages = intdiv($resultTotal->total, $this->getNumberPerPage());
         return $totalPages;
     }
 
@@ -77,12 +58,11 @@ class DisplayInformations extends Database {
      * Retourne la liste des patients par page
      * @return array
      */
-    public function getByTen () :array {
+    public function getByTen ($requestSQL) :array {
         // Connexion à la base de données
         $databaseConnection = parent::getPDO();
         // Requête SQL
-        $query = $databaseConnection->prepare('SELECT * FROM :table ORDER BY `id` ASC LIMIT :numberPerPage OFFSET :offset');
-        $query->bindValue(':table', $this->getTable(), PDO::PARAM_STR);
+        $query = $databaseConnection->prepare($requestSQL);
         $query->bindValue(':numberPerPage', $this->getNumberPerPage(), PDO::PARAM_INT);
         $query->bindValue(':offset', ($this->getPage() - 1) * $this->getNumberPerPage(), PDO::PARAM_INT);
         $query->execute();
@@ -95,7 +75,7 @@ class DisplayInformations extends Database {
      * Retourne toutl les patients 
      * @return array
      */
-    public function getAllPatients () :array {
+    public function getAll () :array {
         // Connexion à la base de données
         $databaseConnection = parent::getPDO();
         // Requête SQL
