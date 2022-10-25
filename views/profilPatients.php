@@ -3,19 +3,23 @@
     <!-- Listage des patients -->
     <div class="containerPrincipal">
         <div class="patientProfil">
-            <div class="containerPatientName">
-                <p><?= $patient->lastname ?></p>
-                <p><?= $patient->firstname ?></p>
-            </div>
-            <div class="containerPatientPhone">
-                <p><?= $patient->phone ?></p>
-            </div>
-            <div class="containerPatientMail">
-                <p><?= $patient->mail ?></p>
-            </div>
-            <div class="containerLink">
-                <a href="profil?id=<?= $patient->id ?>&amp;modify=true">Modifier le profil</a>
-            </div>
+            <?php if (isset($patient)) :?>
+                <?php foreach ($patient as $information) :?>
+                    <div class="containerPatientName">
+                        <p><?= $information->lastname ?></p>
+                        <p><?= $information->firstname ?></p>
+                    </div>
+                    <div class="containerPatientPhone">
+                        <p><?= $information->phone ?></p>
+                    </div>
+                    <div class="containerPatientMail">
+                        <p><?= $information->mail ?></p>
+                    </div>
+                    <div class="containerLink">
+                        <a href="profil?id=<?= $information->id ?>&amp;modify=true">Modifier le profil</a>
+                    </div>
+                <?php endforeach ?>
+            <?php endif ?>
         </div>
     </div>
 </main>

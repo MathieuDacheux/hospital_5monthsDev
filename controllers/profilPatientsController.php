@@ -19,15 +19,18 @@ $description = HEAD_DESCRIPTION[2];
 $profil = new DisplaySpecific();
 
 // Filtrage de l'ID reçu en GET
-if ($profil->verifyIfIdExists() == true) {
+$verifyIfIdExistsRequest = 'SELECT `id` FROM `patients` WHERE `id` = '.$profil->getId().' ;';
+if ($profil->verifyIfIdExists($verifyIfIdExistsRequest) == true) {
     // Si la donnée est valide, récupération des informations du patient
-    $patient = $profil->patientInformations();
+    $specificInformationsRequest = 'SELECT * FROM `patients` WHERE `id` = '.$profil->getId().' ;';
+    $patient = $profil->specificInformations($specificInformationsRequest);
     // Si le formulaire est soumis
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($profil->validationInput($_POST['phone'], REGEX_PHONE) == true &&
         $profil->validationInput($_POST['mail'], REGEX_MAIL) == true) {
             // Modification des informations du patient
-            $profil->modifyInformation();
+            $modifyInformationsRequest = 'UPDATE `patients` SET `phone` = "'.$profil->getPhone().'", `mail` = "'.$this->getMail().'" WHERE `id` = '.$this->getId().' ;';
+            $profil->modifyInformation($modifyInformationsRequest);
             // Redirection vers la page de profil du patient
             header('Location: /profil?id='.$profil->getId());
             exit();

@@ -40,10 +40,10 @@ class DisplaySpecific extends Database {
      * Vérifie si l'ID du patient existe
      * @return bool
      */
-    public function verifyIfIdExists () :bool {
+    public function verifyIfIdExists ($requestSQL) :bool {
         if ($this->validationInput($this->getId(), REGEX_ID) == true) {
             $databaseConnection = parent::getPDO();
-            $queryResult = $databaseConnection->prepare('SELECT `id` FROM `patients` WHERE `id` = '.$this->getId().' ;');
+            $queryResult = $databaseConnection->prepare($requestSQL);
             $queryResult->execute();
             $result = $queryResult->fetch(PDO::FETCH_OBJ);
             if ($result != null) {
@@ -60,13 +60,13 @@ class DisplaySpecific extends Database {
      * Retourne les informations du patient
      * @return array
      */
-    public function patientInformations () {
+    public function specificInformations ($requestSQL) :array {
         // Connexion à la base de données
         $databaseConnection = parent::getPDO();
         // Requête SQL
-        $result = $databaseConnection->query('SELECT * FROM `patients` WHERE `id` = '.$this->getId());
+        $result = $databaseConnection->query($requestSQL);
         // Récupération du résultat
-        $resultInformations = $result->fetch(PDO::FETCH_OBJ);
+        $resultInformations = $result->fetchAll(PDO::FETCH_OBJ);
         return $resultInformations;
     }
 
@@ -74,11 +74,11 @@ class DisplaySpecific extends Database {
      * Update des informations du patient
      * @return bool
      */
-    public function modifyInformation () :bool {
+    public function modifyInformation ($requestSQL) :bool {
         // Connexion à la base de données
         $databaseConnection = parent::getPDO();
         // Requête SQL
-        $result = $databaseConnection->query('UPDATE `patients` SET `phone` = "'.$this->getPhone().'", `mail` = "'.$this->getMail().'" WHERE `id` = '.$this->getId());
+        $result = $databaseConnection->query($requestSQL);
         // Récupération du résultat
         $resultInformations = $result->fetch(PDO::FETCH_OBJ);
         return $resultInformations;

@@ -28,26 +28,6 @@ class RegisterAppointement extends Database {
     }
 
     /**
-     * Validation des inputs
-     * @param mixed $input
-     * @param mixed $REGEX
-     * 
-     * @return bool
-     */
-    public function validationInput ($input, $REGEX) :bool {
-        if(empty($input)) {
-            return false;
-        } else {
-            $isOk = filter_var($input, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => $REGEX)));
-            if (!$isOk) {
-                return false;
-            } else {
-                return true;
-            }
-        }
-    }
-
-    /**
      * Vérifie si l'ID du patient existe dans la base de données
      * @return bool
      */

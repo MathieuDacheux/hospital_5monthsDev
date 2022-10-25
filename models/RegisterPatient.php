@@ -99,6 +99,7 @@ class RegisterPatient extends Database {
         $query = $databaseConnection->prepare('SELECT * FROM `patients` WHERE lastname = '.$this->getLastName().' AND firstname = '.$this->getFirstName().' AND birthdate = '.$this->getBirthDate());
         $result = $query->fetch(PDO::FETCH_OBJ);
         if ($result != null) {
+            var_dump($result);
             return true;
         } else {
             $this->addPatient($databaseConnection);

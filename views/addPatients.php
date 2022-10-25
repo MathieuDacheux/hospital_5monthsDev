@@ -13,7 +13,8 @@
                 <option value="2">Femme</option>
             </select>
             <button>SUBMIT</button>
-            <p><?= (isset($confirmation)) ? $confirmation : $error ?></p>
+            <p><?= (isset($confirmation)) ? $confirmation : '' ?></p>
+            <p><?= (isset($error)) ? $error : '' ?></p>
         </form>
     </div>
 </main>
