@@ -91,6 +91,18 @@ class RegisterPatient extends Database {
     }
 
     /**
+     * Retourne tout les patients de la base de données
+     * @param mixed $databaseConnection
+     * 
+     * @return array
+     */
+    public static function getAllPatients ($databaseConnection) :array {
+        $query = $databaseConnection->query('SELECT * FROM `patients`');
+        $result = $query->fetchAll(PDO::FETCH_OBJ);
+        return $result;
+    }
+
+    /**
      * Vérifie si le patient existe déjà dans la base de données
      * @return bool
      */
