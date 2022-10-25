@@ -10,7 +10,7 @@
                         <p>Prénom : <?= $information->firstname ?></p>
                     </div>
                     <div class="containerPatientPhone">
-                        <p>Téléphone :<?= $information->phone ?></p>
+                        <p>Téléphone : <?= $information->phone ?></p>
                     </div>
                     <div class="containerPatientMail">
                         <p>E-mail : <?= $information->mail ?></p>

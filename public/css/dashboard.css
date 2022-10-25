@@ -353,4 +353,118 @@
     .containerLink a {
         color: var(--black0);
     }
+
+    /* Listing patient */
+    .containerListingPatients {
+        width: 90%;
+        height: auto;
+        background-color: var(--hr);
+        border-radius: 10px;
+        padding: 1rem;
+    }
+
+    .patientCard {
+        width: 90%;
+        height: 50px;
+        background-color: var(--primary80);
+        border-radius: 5px;
+        margin-bottom: 1rem;
+    }
+
+    .containerPatient {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0rem .5rem;
+        color: var(--black0);
+    }
+    
+    .containerLinkList {
+        background-color: var(--black0);
+        border-radius: 5px;
+        padding: .25rem .5rem;
+    }
+
+    .pageActive {
+        font-size: 1.5rem;
+        margin: 0rem 1rem;
+        color: var(--primary80);
+    }
+
+    .pageBefore, .pageAfter {
+        font-size: 1.25rem;
+        color: var(--primary60);
+    }
+
+    /* Formulaire patient */
+
+    .newPatient {
+        width: 350px;
+        background-color: var(--hr);
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .containerTitle {
+        margin: .5rem 0rem;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .containerForm form {
+        padding: 0rem .5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .containerForm form input, select {
+        padding: .25rem .5rem;
+        border-radius: 5px;
+        border: 2px solid var(--primary40);
+        margin-bottom: .75rem;
+        background-color: var(--black0);
+
+    }
+
+    .containerForm form button {
+        padding: .5rem 1rem;
+        border-radius: 5px;
+        background-color: var(--primary80);
+        border: 0;
+        color: var(--black0);
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    .containerInputName, .containerInputContent {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .containerInputName input, .containerInputContent input {
+        width: 49%;
+    }
+
+    input[type=date] {
+        width: 100%;
+    }
+
+    select {
+        width: 100%;
+    }
+
+    .containerForm p {
+        margin-bottom: .5rem;
+    }
 }

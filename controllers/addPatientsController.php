@@ -24,9 +24,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $register->validationInput($register->getMail(), REGEX_MAIL) == true && 
     $register->validationInput($register->getGender(), REGEX_GENDER) == true) {
         // Ajout du patient dans la base de données
-        $register->checkPatient();
+        if ($register->checkPatient() == true) {
+            $confirmation = 'Le patient existe déjà';
+        } else {
+            $confirmation = 'Le patient a bien été ajouté';
+        }
         // Affichage du message de succès
-        $confirmation = 'Le patient a bien été ajouté';
     } else {
         // Affichage du message d'erreur
         $error = 'Veuillez remplir correctement le formulaire';
@@ -36,5 +39,5 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 // Appel des vues
 
 include(__DIR__.'/../views/templates/header.php');
-include(__DIR__.'/../views/templates/main.php');
+include(__DIR__.'/../views/addPatients.php');
 include(__DIR__.'/../views/templates/footer.php');

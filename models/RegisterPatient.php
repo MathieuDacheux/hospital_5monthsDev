@@ -96,10 +96,12 @@ class RegisterPatient extends Database {
      */
     public function checkPatient() :bool {
         $databaseConnection = parent::getPDO();
-        $query = $databaseConnection->prepare('SELECT * FROM `patients` WHERE lastname = '.$this->getLastName().' AND firstname = '.$this->getFirstName().' AND birthdate = '.$this->getBirthDate());
-        $result = $query->fetch(PDO::FETCH_OBJ);
-        if ($result != null) {
-            var_dump($result);
+        $query = $databaseConnection->prepare('SELECT * FROM `patients` WHERE `lastname` = :lastname AND `firstname` = :firstname AND `birthdate` = :birthdate ;');
+        $query->bindValue(':lastname', $this->getLastName(), PDO::PARAM_STR);
+        $query->bindValue(':firstname', $this->getFirstName(), PDO::PARAM_STR);
+        $query->bindValue(':birthdate', $this->getBirthDate(), PDO::PARAM_STR);
+        $result = $query->execute();
+        if ($result == true) {
             return true;
         } else {
             $this->addPatient($databaseConnection);

@@ -30,7 +30,7 @@
             <ul class="mobileNavList flexCenterCenterColumn">
                 <li>
                     <i class="fa-regular fa-square-check"></i>
-                    <span>Rappels</span>
+                    <span><a href="">Rappels</a></span>
                 </li>
                 <li>
                     <i class="fa-regular fa-calendar"></i>
@@ -54,22 +54,23 @@
             <ul>
                 <div class="containerList">
                     <li>
-                        <i class="fa-regular fa-square-check"></i>
-                        <span>Rappels</span>
+                        <i class="fa-regular fa-calendar"></i>
+                        <span><a href="/nouveau_rendez_vous">Ajout rendez-vous</a></span>
+                        
                     </li>
                     <li>
-                        <i class="fa-regular fa-calendar"></i>
-                        <span>Calendrier</span>
+                        <i class="fa-regular fa-address-book"></i>
+                        <span><a href="/nouveau_patient">Ajout patient</a></span>
                     </li>
                 </div>
                 <div class="containerList">
                     <li>
                         <i class="fa-regular fa-calendar"></i>
-                        <span>Rendez-vous</span>
+                        <span><a href="/rendez_vous">Rendez-vous</a></span>
                     </li>
                     <li>
                         <i class="fa-regular fa-address-book"></i>
-                        <span>Clients</span>
+                        <span><a href="/patients">Patients</a></span>
                     </li>
                 </div>
                 <li>
