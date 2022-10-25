@@ -1,8 +1,20 @@
 <?php
 
 // Constante de configuration du head HTML
-define('HEAD_TITLE', ['Ajout d\'un patient', '', '', '', '']);
-define('HEAD_DESCRIPTION', ['Bienvenu à l\'hopital de l\'amour et du soin', '', '', '', '']);
+define('HEAD_TITLE', [
+'CareUs | Accueil',
+'',
+'',
+'',
+''
+]);
+define('HEAD_DESCRIPTION', [
+'Bienvenue sur le site de CareUs, votre centre de soins proche de vous',
+'',
+'',
+'',
+''
+]);
 
 // Constante de connexion à la base de données
 define('DATABASE', 'hospitalE2N');

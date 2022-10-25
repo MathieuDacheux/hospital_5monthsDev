@@ -1,19 +1,19 @@
 <!-- Section Main -->
 <main>
-    <!-- Listage des patients -->
-    <div class="containerPrincipal">
-        <div class="patientProfil">
+    <!-- Information du patient choisi -->
+    <section class="containerCentral flexCenterCenter">
+        <div class="patientProfil flexCenterCenterColumn">
             <?php if (isset($patient)) :?>
                 <?php foreach ($patient as $information) :?>
                     <div class="containerPatientName">
-                        <p><?= $information->lastname ?></p>
-                        <p><?= $information->firstname ?></p>
+                        <p>Nom : <?= $information->lastname ?></p>
+                        <p>Prénom : <?= $information->firstname ?></p>
                     </div>
                     <div class="containerPatientPhone">
-                        <p><?= $information->phone ?></p>
+                        <p>Téléphone :<?= $information->phone ?></p>
                     </div>
                     <div class="containerPatientMail">
-                        <p><?= $information->mail ?></p>
+                        <p>E-mail : <?= $information->mail ?></p>
                     </div>
                     <div class="containerLink">
                         <a href="profil?id=<?= $information->id ?>&amp;modify=true">Modifier le profil</a>
@@ -21,5 +21,5 @@
                 <?php endforeach ?>
             <?php endif ?>
         </div>
-    </div>
+    </section>
 </main>

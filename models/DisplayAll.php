@@ -75,11 +75,11 @@ class DisplayAll extends Database {
      * Retourne toutl les patients 
      * @return array
      */
-    public function getAll () :array {
+    public function getAll ($requestSQL) :array {
         // Connexion à la base de données
         $databaseConnection = parent::getPDO();
         // Requête SQL
-        $query = $databaseConnection->prepare('SELECT `lastname`, `firstname` FROM `patients` ORDER BY `lastname` ASC');
+        $query = $databaseConnection->prepare($requestSQL);
         $query->execute();
         // Récupération du résultat
         $result = $query->fetchAll(PDO::FETCH_OBJ);

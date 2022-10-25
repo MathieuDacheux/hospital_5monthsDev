@@ -9,12 +9,9 @@ require_once(__DIR__.'/../helpers/functions.php');
 require_once(__DIR__.'/../models/Database.php');
 require_once(__DIR__.'/../models/RegisterPatient.php');
 
-// Appel des fonctions
-
 // Variables
 $title = HEAD_TITLE[0];
 $description = HEAD_DESCRIPTION[0];
-$style = whichCSS();
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Instanciation de la classe RegisterPatient
@@ -39,5 +36,5 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 // Appel des vues
 
 include(__DIR__.'/../views/templates/header.php');
-include(__DIR__.'/../views/addPatients.php');
+include(__DIR__.'/../views/templates/main.php');
 include(__DIR__.'/../views/templates/footer.php');

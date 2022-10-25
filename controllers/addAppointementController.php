@@ -15,12 +15,13 @@ require_once(__DIR__.'/../models/RegisterAppointement.php');
 // Variables
 $title = HEAD_TITLE[3];
 $description = HEAD_DESCRIPTION[3];
+$getAllRequest = 'SELECT `lastname`, `firstname` FROM `patients` ORDER BY `lastname` ASC';
 
 // Instanciation de la classe DisplayList
 $displayPatient = new DisplayAll();
 
 // Récupération des patients
-$patientsList = $displayPatient->getAll();
+$patientsList = $displayPatient->getAll($getAllRequest);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Instanciation de la classe RegisterAppointement

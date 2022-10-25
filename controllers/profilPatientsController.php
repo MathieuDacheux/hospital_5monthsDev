@@ -29,7 +29,7 @@ if ($profil->verifyIfIdExists($verifyIfIdExistsRequest) == true) {
         if ($profil->validationInput($_POST['phone'], REGEX_PHONE) == true &&
         $profil->validationInput($_POST['mail'], REGEX_MAIL) == true) {
             // Modification des informations du patient
-            $modifyInformationsRequest = 'UPDATE `patients` SET `phone` = "'.$profil->getPhone().'", `mail` = "'.$this->getMail().'" WHERE `id` = '.$this->getId().' ;';
+            $modifyInformationsRequest = 'UPDATE `patients` SET `phone` = "'.$profil->getPhone().'", `mail` = "'.$profil->getMail().'" WHERE `id` = '.$profil->getId().' ;';
             $profil->modifyInformation($modifyInformationsRequest);
             // Redirection vers la page de profil du patient
             header('Location: /profil?id='.$profil->getId());
