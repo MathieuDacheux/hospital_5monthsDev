@@ -15,7 +15,6 @@ require_once(__DIR__.'/../models/DisplayAll.php');
 $title = HEAD_TITLE[1];
 $description = HEAD_DESCRIPTION[1];
 
-$howManyPagesRequest = 'SELECT COUNT(`id`) as total FROM `patients` ;';
 $getByTenRequest = 'SELECT * FROM `patients` ORDER BY `id` ASC LIMIT :numberPerPage OFFSET :offset';
 
 // Instanciation de la classe DisplayList

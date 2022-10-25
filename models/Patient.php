@@ -9,6 +9,8 @@ class RegisterPatient extends Database {
     private $phone;
     private $mail;
     private $gender;
+    private $numberPerPage;
+    private $page;
 
     public function __construct($firstname, $lastname, $birthdate, $phone, $mail, $gender) {
         parent::__construct();
@@ -18,6 +20,8 @@ class RegisterPatient extends Database {
         $this->phone = trim(filter_input(INPUT_POST, $phone, FILTER_SANITIZE_SPECIAL_CHARS));
         $this->mail = trim(filter_input(INPUT_POST, $mail, FILTER_SANITIZE_EMAIL));
         $this->gender = trim(filter_input(INPUT_POST, $gender, FILTER_SANITIZE_NUMBER_INT));
+        $this->numberPerPage = 10;
+        $this->page = 1;
     }
 
     /**
@@ -69,6 +73,27 @@ class RegisterPatient extends Database {
     }
 
     /**
+     * Retourne le nombre d'éléments par page
+     * @return int
+     */
+    public function getNumberPerPage() :int {
+        return $this->numberPerPage;
+    }
+
+    /**
+     * Retourne le nombre de la page
+     * @return int
+     */
+    public function getPage() :int {
+        return $this->page;
+    }
+
+
+    //********************************************** **********************************************/
+    //******************************************* CREATE ******************************************/
+    //********************************************** **********************************************/
+    
+    /**
      * Ajout d'un patient dans la base de données
      * @param mixed $databaseConnection
      * 
@@ -89,19 +114,7 @@ class RegisterPatient extends Database {
             return false;
         }
     }
-
-    /**
-     * Retourne tout les patients de la base de données
-     * @param mixed $databaseConnection
-     * 
-     * @return array
-     */
-    public static function getAllPatients ($databaseConnection) :array {
-        $query = $databaseConnection->query('SELECT * FROM `patients`');
-        $result = $query->fetchAll(PDO::FETCH_OBJ);
-        return $result;
-    }
-
+    
     /**
      * Vérifie si le patient existe déjà dans la base de données
      * @return bool
@@ -120,4 +133,75 @@ class RegisterPatient extends Database {
             return false;
         }
     }
+
+    //********************************************** **********************************************/
+    //******************************************* READ ********************************************/
+    //********************************************** **********************************************/
+
+    /**
+     * Settings d'une nouvelle valeur pour page
+     * @return int
+     */
+    public function setPage () :int {
+        if (isset($_GET['page'])) {
+            $input = filter_input(INPUT_GET , 'page', FILTER_SANITIZE_NUMBER_INT);
+            if (parent::validationInput($input, REGEX_PAGE) == true) {
+                $this->page = $input;
+            } else {
+                $this->page = 1;
+            }
+        } else {
+            $this->page = 1;
+        }
+        return intval($this->page, 10);
+    }
+
+    /**
+     * Retourne le nombre total de patients
+     * @return int
+     */
+    public function howManyPages () :int {
+        // Connexion à la base de données
+        $databaseConnection = parent::getPDO();
+        // Requête SQL
+        $query = $databaseConnection->prepare('SELECT COUNT(`id`) as total FROM `patients` ;');
+        $query->execute();
+        // Récupération du résultat
+        $resultTotal = $query->fetch(PDO::FETCH_OBJ);
+        $totalPages = intdiv($resultTotal->total, $this->getNumberPerPage());
+        return $totalPages;
+    }
+
+    /**
+     * Retourne la liste des patients par page
+     * @return array
+     */
+    public function getByTen () :array {
+        // Connexion à la base de données
+        $databaseConnection = parent::getPDO();
+        // Requête SQL
+        $query = $databaseConnection->prepare('SELECT * FROM `patients` ORDER BY `id` ASC LIMIT :numberPerPage OFFSET :offset');
+        $query->bindValue(':numberPerPage', $this->getNumberPerPage(), PDO::PARAM_INT);
+        $query->bindValue(':offset', ($this->getPage() - 1) * $this->getNumberPerPage(), PDO::PARAM_INT);
+        $query->execute();
+        // Récupération du résultat
+        $result = $query->fetchAll(PDO::FETCH_OBJ);
+        return $result;
+    }
+
+    /**
+     * Retourne tous les patients 
+     * @return array
+     */
+    public static function getAll () :array {
+        // Connexion à la base de données
+        $databaseConnection = parent::getPDO();
+        // Requête SQL
+        $query = $databaseConnection->prepare('SELECT `lastname`, `firstname`, `id` FROM `patients` ORDER BY `id` DESC ;');
+        $query->execute();
+        // Récupération du résultat
+        $result = $query->fetchAll(PDO::FETCH_OBJ);
+        return $result;
+    }
+
 }

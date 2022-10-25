@@ -7,7 +7,7 @@ require_once(__DIR__.'/../helpers/functions.php');
 
 // Appel des models
 require_once(__DIR__.'/../models/Database.php');
-require_once(__DIR__.'/../models/DisplayAll.php');
+require_once(__DIR__.'/../models/Patient.php');
 
 // Variables
 $title = HEAD_TITLE[0];
@@ -15,11 +15,10 @@ $description = HEAD_DESCRIPTION[0];
 $getAllRequestPatients = 'SELECT `lastname`, `firstname`, `id` FROM `patients` ORDER BY `id` DESC';
 $getAllRequestAppointments = 'SELECT `dateHour`, `idPatients`, `id` FROM `appointments` ORDER BY `id` DESC';
 
-// Instanciation de la classe DisplayAll
-$displayAll = new DisplayAll();
 
-// Appel de la méthode getAll
-$patients = $displayAll->getAll($getAllRequestPatients);
+
+// Appel de la méthode statique getAll
+$patients = RegisterPatient::getAll($getAllRequestPatients);
 $appointment = $displayAll->getAll($getAllRequestAppointments);
 
 // Appel des vues
