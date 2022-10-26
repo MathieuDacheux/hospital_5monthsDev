@@ -150,10 +150,9 @@ class Appointment {
         // Connexion à la base de données
         $databaseConnection = Database::getPDO();
         // Requête SQL
-        $query = $databaseConnection->prepare('SELECT `patients`.`lastname`, `patients`.`firstname`, `appointments`.`dateHour` FROM `appointments` LEFT JOIN `patients` ON `appointments`.`idPatients` = `patients`.`id` ORDER BY `dateHour` ASC LIMIT :numberPerPage OFFSET :offset ;');
+        $query = $databaseConnection->prepare('SELECT `patients`.`lastname`, `patients`.`firstname`, `patients`.`id`, `appointments`.`dateHour` FROM `appointments` LEFT JOIN `patients` ON `appointments`.`idPatients` = `patients`.`id` ORDER BY `dateHour` ASC LIMIT :numberPerPage OFFSET :offset ;');
         $query->bindValue(':numberPerPage', 10, PDO::PARAM_INT);
         $query->bindValue(':offset', (Appointment::howManyPages() - 1) * 10, PDO::PARAM_INT);
-        var_dump(Appointment::howManyPages());
         $query->execute();
         // Récupération du résultat
         $result = $query->fetchAll(PDO::FETCH_OBJ);
@@ -196,16 +195,18 @@ class Appointment {
     }
 
     /**
-     * Retourne les informations du patient
+     * Retourne les rendez-vous d'un patient
      * @return array
      */
-    public static function specificInformations () :array {
-        // Connexion à la base de données
-        $databaseConnection = Database::getPDO();
-        // Requête SQL
-        $result = $databaseConnection->query('SELECT * FROM `appointments` WHERE `id` = '.$_GET['id'].' ;');
-        // Récupération du résultat
-        $resultInformations = $result->fetchAll(PDO::FETCH_OBJ);
-        return $resultInformations;
+    public static function getAppointmentByPatient () :array {
+        if (Database::validationInput($_GET['id'] , REGEX_ID) == true) {
+            $databaseConnection = Database::getPDO();
+            $queryResult = $databaseConnection->prepare('SELECT `dateHour` FROM `appointments` WHERE `idPatients` = '.$_GET['id'].' ;');
+            $queryResult->execute();
+            $result = $queryResult->fetchAll(PDO::FETCH_OBJ);
+            return $result;
+        } else {
+            return false;
+        }
     }
 }

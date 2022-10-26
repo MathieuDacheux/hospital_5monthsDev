@@ -8,6 +8,7 @@ require_once(__DIR__.'/../helpers/functions.php');
 // Appel des models
 require_once(__DIR__.'/../models/Database.php');
 require_once(__DIR__.'/../models/Patient.php');
+require_once(__DIR__.'/../models/Appointment.php');
 
 // Appel des fonctions
 
@@ -18,6 +19,8 @@ $description = HEAD_DESCRIPTION[2];
 if (Patient::verifyIfIdExists() == true) {
     // Si la donnée est valide, récupération des informations du patient
     $patient = Patient::specificInformations();
+    // Récupération des rendez-vous du patient
+    $appointments = Appointment::getAppointmentByPatient();
     // Si le formulaire est soumis
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $profil = new Patient('lastName', 'firstName', 'birthDate', 'phone', 'mail', 'gender');

@@ -15,6 +15,15 @@
                     <div class="containerPatientMail">
                         <p>E-mail : <?= $information->mail ?></p>
                     </div>
+                    <div class="containerApointment">
+                        <?php if (isset($appointments)) :?>
+                            <?php foreach ($appointments as $appointment) :?>
+                                <div class="containerApointmentDate">
+                                    <p><?= date_format(date_create($appointment->dateHour), 'd/m') ?> à <?= date_format(date_create($appointment->dateHour), 'H:i') ?>h</p>
+                                </div>
+                            <?php endforeach ?>
+                        <?php endif ?>
+                    </div>
                     <div class="containerLink">
                         <a href="profil?id=<?= $information->id ?>&amp;modify=true">Modifier le profil</a>
                     </div>

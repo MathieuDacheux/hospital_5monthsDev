@@ -24,5 +24,5 @@ $patientsList = Appointment::getByTen();
 
 // Appel des vues
 include(__DIR__.'/../views/templates/header.php');
-include(__DIR__.'/../views/listAppointment.php');
+include(__DIR__.'/../views/listAppointments.php');
 include(__DIR__.'/../views/templates/footer.php');
