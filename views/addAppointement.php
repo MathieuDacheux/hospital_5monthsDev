@@ -7,7 +7,7 @@
                 <h3>Information du rendez-vous</h3>
             </div>
             <form method="POST">
-                <input type="date" name="birthDate" id="birthDate" placeholder="Date">
+                <input type="datetime-local" name="dateHour" id="dateHour" placeholder="Date">
                 <select name="id" id="id">
                 <?php foreach($patientsList as $patient) : ?>
                     <option value="<?= $patient->id ?>"><?= $patient->lastname ?> <?= $patient->firstname ?></option>

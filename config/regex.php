@@ -7,4 +7,4 @@ define('REGEX_BIRTHDATE', '/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/');
 define('REGEX_GENDER', '/^[1-2]{1}$/');
 define('REGEX_ID', '/^[0-9]{1,}$/');
 define('REGEX_PAGE', '/^[0-9]{1,}$/');
-define('REGEX_DATETIMELOCAL', '/^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}$/');
+define('REGEX_DATETIME', '/^[0-9]{4}-[0-9]{2}-[0-9]{2}\s[0-9]{2}:[0-9]{2}$/');

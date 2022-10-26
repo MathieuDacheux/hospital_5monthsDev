@@ -7,8 +7,8 @@ require_once(__DIR__.'/../helpers/functions.php');
 
 // Appel des models
 require_once(__DIR__.'/../models/Database.php');
-require_once(__DIR__.'/../models/DisplayAll.php');
-require_once(__DIR__.'/../models/RegisterAppointement.php');
+require_once(__DIR__.'/../models/Patient.php');
+require_once(__DIR__.'/../models/Appointment.php');
 
 // Appel des fonctions
 
@@ -17,26 +17,26 @@ $title = HEAD_TITLE[3];
 $description = HEAD_DESCRIPTION[3];
 $getAllRequest = 'SELECT `lastname`, `firstname` FROM `patients` ORDER BY `lastname` ASC';
 
-// Instanciation de la classe DisplayList
-$displayPatient = new DisplayAll();
-
 // Récupération des patients
-$patientsList = $displayPatient->getAll($getAllRequest);
+$patientsList = Patient::getAll();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Instanciation de la classe RegisterAppointement
-    $registerAppointement = new RegisterAppointement('datetime', 'id');
-    // Vérification de la validité des inputs
-    if ($this->verifyIfIdExists() == true && $this->verifyIfDatetimeIsAvailable() == true) {
-        if ($registerAppointement->addNewAppointement() == true) {
-            // Redirection vers la page de liste des rendez-vous
-            header('Location: /rendez_vous');
-            exit();
+    $registerAppointement = new Appointement('dateHour', 'id');
+    if (Database::validationInput($registerAppointement->getDate(), REGEX_DATETIME) && 
+    Database::validationInput($registerAppointement->getId(), REGEX_ID)) {
+        if ($registerAppointement->idExists() == true) {
+            if ($registerAppointement->datetimeIsAvailable() == true) {
+                $registerAppointement->addAppointement();
+                $confirmation = 'Le rendez-vous a bien été enregistré';
+            } else {
+                $error = 'La date et l\'heure du rendez-vous ne sont pas disponibles';
+            }
         } else {
-            $error = 'Le créneau horaire est déjà pris';
+            $error = 'Le patient n\'existe pas';
         }
     } else {
-        $error = 'Les données fournies sont non conformes';
+        $error = 'Les données ne sont pas conformes';
     }
 }
 

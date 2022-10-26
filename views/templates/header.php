@@ -55,18 +55,18 @@
                 <div class="containerList">
                     <li>
                         <i class="fa-regular fa-calendar"></i>
-                        <span><a href="/nouveau_rendez_vous">Ajout rendez-vous</a></span>
+                        <span><a href="/nouveau-rendez-vous">Ajout rendez-vous</a></span>
                         
                     </li>
                     <li>
                         <i class="fa-regular fa-address-book"></i>
-                        <span><a href="/nouveau_patient">Ajout patient</a></span>
+                        <span><a href="/nouveau-patient">Ajout patient</a></span>
                     </li>
                 </div>
                 <div class="containerList">
                     <li>
                         <i class="fa-regular fa-calendar"></i>
-                        <span><a href="/rendez_vous">Rendez-vous</a></span>
+                        <span><a href="/rendez-vous">Rendez-vous</a></span>
                     </li>
                     <li>
                         <i class="fa-regular fa-address-book"></i>
