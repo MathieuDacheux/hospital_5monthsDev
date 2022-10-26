@@ -8,6 +8,7 @@ require_once(__DIR__.'/../helpers/functions.php');
 // Appel des models
 require_once(__DIR__.'/../models/Database.php');
 require_once(__DIR__.'/../models/Patient.php');
+require_once(__DIR__.'/../models/Appointment.php');
 
 // Variables
 $title = HEAD_TITLE[0];
@@ -15,8 +16,11 @@ $description = HEAD_DESCRIPTION[0];
 $getAllRequestPatients = 'SELECT `lastname`, `firstname`, `id` FROM `patients` ORDER BY `id` DESC';
 $getAllRequestAppointments = 'SELECT `dateHour`, `idPatients`, `id` FROM `appointments` ORDER BY `id` DESC';
 
-// Appel de la méthode statique getAll
+// Appel de la méthode statique getAll de la classe Patient
 $patients = Patient::getAll();
+
+// Appel de la méthode statique getAll de la classe Appointment
+$appointments = Appointment::getAll();
 
 // Appel des vues
 

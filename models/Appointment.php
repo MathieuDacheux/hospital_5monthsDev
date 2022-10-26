@@ -1,6 +1,6 @@
 <?php
 
-class Appointement {
+class Appointment {
     
     protected $date;
     protected $id;
@@ -131,11 +131,14 @@ class Appointement {
         // Connexion à la base de données
         $databaseConnection = Database::getPDO();
         // Requête SQL
-        $query = $databaseConnection->prepare('SELECT COUNT(`id`) as total FROM `patients` ;');
+        $query = $databaseConnection->prepare('SELECT COUNT(`id`) as total FROM `appointments` ;');
         $query->execute();
         // Récupération du résultat
         $resultTotal = $query->fetch(PDO::FETCH_OBJ);
         $totalPages = intdiv($resultTotal->total, 10);
+        if ($resultTotal->total % 10 != 0) {
+            $totalPages++;
+        }
         return $totalPages;
     }
 
@@ -147,9 +150,10 @@ class Appointement {
         // Connexion à la base de données
         $databaseConnection = Database::getPDO();
         // Requête SQL
-        $query = $databaseConnection->prepare('SELECT * FROM `patients` ORDER BY `id` ASC LIMIT :numberPerPage OFFSET :offset');
+        $query = $databaseConnection->prepare('SELECT `patients`.`lastname`, `patients`.`firstname`, `appointments`.`dateHour` FROM `appointments` LEFT JOIN `patients` ON `appointments`.`idPatients` = `patients`.`id` ORDER BY `dateHour` ASC LIMIT :numberPerPage OFFSET :offset ;');
         $query->bindValue(':numberPerPage', 10, PDO::PARAM_INT);
-        $query->bindValue(':offset', (Patient::howManyPages() - 1) * 10, PDO::PARAM_INT);
+        $query->bindValue(':offset', (Appointment::howManyPages() - 1) * 10, PDO::PARAM_INT);
+        var_dump(Appointment::howManyPages());
         $query->execute();
         // Récupération du résultat
         $result = $query->fetchAll(PDO::FETCH_OBJ);
@@ -164,7 +168,7 @@ class Appointement {
         // Connexion à la base de données
         $databaseConnection = Database::getPDO();
         // Requête SQL
-        $query = $databaseConnection->prepare('SELECT `lastname`, `firstname`, `id` FROM `patients` ORDER BY `id` DESC ;');
+        $query = $databaseConnection->prepare('SELECT `patients`.`lastname`, `patients`.`firstname`, `patients`.`id` ,`dateHour` FROM `appointments` LEFT JOIN `patients` ON `appointments`.`idPatients` = `patients`.`id` ORDER BY `dateHour` ;');
         $query->execute();
         // Récupération du résultat
         $result = $query->fetchAll(PDO::FETCH_OBJ);
@@ -178,7 +182,7 @@ class Appointement {
     public static function verifyIfIdExists () :bool {
         if (Database::validationInput($_GET['id'] , REGEX_ID) == true) {
             $databaseConnection = Database::getPDO();
-            $queryResult = $databaseConnection->prepare('SELECT `id` FROM `patients` WHERE `id` = '.$_GET['id'].' ;');
+            $queryResult = $databaseConnection->prepare('SELECT `id` FROM `appointments` WHERE `id` = '.$_GET['id'].' ;');
             $queryResult->execute();
             $result = $queryResult->fetch(PDO::FETCH_OBJ);
             if ($result != null) {
@@ -199,7 +203,7 @@ class Appointement {
         // Connexion à la base de données
         $databaseConnection = Database::getPDO();
         // Requête SQL
-        $result = $databaseConnection->query('SELECT * FROM `patients` WHERE `id` = '.$_GET['id'].' ;');
+        $result = $databaseConnection->query('SELECT * FROM `appointments` WHERE `id` = '.$_GET['id'].' ;');
         // Récupération du résultat
         $resultInformations = $result->fetchAll(PDO::FETCH_OBJ);
         return $resultInformations;

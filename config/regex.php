@@ -8,3 +8,4 @@ define('REGEX_GENDER', '/^[1-2]{1}$/');
 define('REGEX_ID', '/^[0-9]{1,}$/');
 define('REGEX_PAGE', '/^[0-9]{1,}$/');
 define('REGEX_DATETIME', '/^[0-9]{4}-[0-9]{2}-[0-9]{2}\s[0-9]{2}:[0-9]{2}$/');
+define('DATETIME_FORMAT', 'Y-m-d H:i');

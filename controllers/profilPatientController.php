@@ -48,9 +48,9 @@ if (Patient::verifyIfIdExists() == true) {
 include(__DIR__.'/../views/templates/header.php');
 
 if (isset($_GET['modify'])) {
-    include(__DIR__.'/../views/profilPatientsModify.php');
+    include(__DIR__.'/../views/profilPatientModify.php');
 } else {
-    include(__DIR__.'/../views/profilPatients.php');
+    include(__DIR__.'/../views/profilPatient.php');
 }
 
 include(__DIR__.'/../views/templates/footer.php');

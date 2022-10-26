@@ -22,7 +22,7 @@ $patientsList = Patient::getAll();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Instanciation de la classe RegisterAppointement
-    $registerAppointement = new Appointement('dateHour', 'id');
+    $registerAppointement = new Appointment('dateHour', 'id');
     if (Database::validationInput($registerAppointement->getDate(), REGEX_DATETIME) && 
     Database::validationInput($registerAppointement->getId(), REGEX_ID)) {
         if ($registerAppointement->idExists() == true) {

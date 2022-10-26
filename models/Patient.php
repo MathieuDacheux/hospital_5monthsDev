@@ -123,6 +123,7 @@ class Patient {
     public function setGender ($gender) :void {
         $this->gender = trim(filter_input(INPUT_POST, $gender, FILTER_SANITIZE_NUMBER_INT));
     }
+    
     /**
      * Retourne le genre du patient
      * @return string
@@ -225,7 +226,7 @@ class Patient {
         // Requête SQL
         $query = $databaseConnection->prepare('SELECT * FROM `patients` ORDER BY `id` ASC LIMIT :numberPerPage OFFSET :offset');
         $query->bindValue(':numberPerPage', 10, PDO::PARAM_INT);
-        $query->bindValue(':offset', (Patient::howManyPages() - 1) * 10, PDO::PARAM_INT);
+        $query->bindValue(':offset', (Patient::setPage() - 1) * 10, PDO::PARAM_INT);
         $query->execute();
         // Récupération du résultat
         $result = $query->fetchAll(PDO::FETCH_OBJ);

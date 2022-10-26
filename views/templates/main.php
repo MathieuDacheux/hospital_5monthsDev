@@ -44,11 +44,11 @@
                                     <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80" alt="Photo du patient">
                                 </div>
                                 <div class="containerName">
-                                    <p><?= $appointments[$i]->dateHour ?> <?= $appointment[$i]->idPatients ?></p>
+                                    <p><?= $appointments[$i]->lastname ?> <?= $appointments[$i]->firstname ?> le <?= date_format(date_create($appointments[$i]->dateHour), 'd/m') ?> à <?= date_format(date_create($appointments[$i]->dateHour), 'H:i') ?>h</p>
                                 </div>
                                 <div class="containerInformations flexCenterCenter">
                                     <div class="containerPlus flexCenterCenter">
-                                        <a href="/rendez_vous?id=<?= $appointment[$i]->id ?>"><i class="fa-solid fa-plus"></i></a>
+                                        <a href="/rendez-vous?id=<?= $appointments[$i]->id ?>"><i class="fa-solid fa-plus"></i></a>
                                     </div>
                                 </div>      
                             </div>
