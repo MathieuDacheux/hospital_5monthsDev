@@ -1,13 +1,26 @@
 <?php
 
-class RegisterAppointement extends Database {
-    private $date;
-    private $id;
+class Appointement {
+    protected $date;
+    protected $id;
 
     public function __construct($date, $id) {
-        parent::__construct();
         $this->date = trim(filter_input(INPUT_POST, $date, FILTER_SANITIZE_SPECIAL_CHARS));
         $this->id = trim(filter_input(INPUT_POST, $id, FILTER_SANITIZE_NUMBER_INT));
+    }
+
+    //********************************************** **********************************************/
+    //**************************************** SETTER/GETTER **************************************/
+    //********************************************** **********************************************/
+
+    /**
+     * Settings de la date
+     * @param mixed $date
+     * 
+     * @return [type]
+     */
+    public function setDate ($date) {
+        $this->date = $date;
     }
 
     /**
@@ -19,6 +32,16 @@ class RegisterAppointement extends Database {
         return $this->date;
     }
 
+    /**
+     * Settings de l'id du rendez-vous
+     * @param mixed $id
+     * 
+     * @return [type]
+     */
+    public function setId ($id) {
+        $this->id = $id;
+    }
+    
     /**
      * Retour l'ID du patient
      * @return int
@@ -32,8 +55,8 @@ class RegisterAppointement extends Database {
      * @return bool
      */
     public function verifyIfIdExists () :bool {
-        if ($this->validationInput($this->getId(), REGEX_ID) == true) {
-            $databaseConnection = parent::getPDO();
+        if (Database::validationInput($this->getId(), REGEX_ID) == true) {
+            $databaseConnection = Database::getPDO();
             $queryResult = $databaseConnection->prepare('SELECT `id` FROM `patients` WHERE `id` = '.$this->getId().' ;');
             $queryResult->execute();
             $result = $queryResult->fetch(PDO::FETCH_OBJ);
@@ -52,8 +75,8 @@ class RegisterAppointement extends Database {
      * @return bool
      */
     function verifyIfDatetimeIsAvailable () :bool {
-        if ($this->validationInput($this->getDate(), REGEX_DATETIMELOCAL) == true) {
-            $databaseConnection = parent::getPDO();
+        if (Database::validationInput($this->getDate(), REGEX_DATETIMELOCAL) == true) {
+            $databaseConnection = Database::getPDO();
             $queryResult = $databaseConnection->prepare('SELECT `dateHour` FROM `appointments` WHERE `dateHour` = "'.DateTime::createFromFormat('Y-m-d\ \H:i:s', $this->getDate()).'" ;');
             $queryResult->execute();
             $result = $queryResult->fetch(PDO::FETCH_OBJ);
@@ -72,12 +95,11 @@ class RegisterAppointement extends Database {
      * @return bool
      */
     public function addNewAppointement () :bool {
-        $databaseConnection = parent::getPDO();
-        var_dump(DateTime::createFromFormat('Y-m-d\ \H:i:s', $this->getDate()));
-        $queryResult = $databaseConnection->prepare('INSERT INTO `appointments` (dateHour, idPatients) VALUES (:dateHour, :id);');
-        $queryResult->bindValue(':dateHour', $this->getDate(), PDO::PARAM_STR);
-        $queryResult->bindValue(':id', $this->getId(), PDO::PARAM_INT);
-        $queryResult->execute();
+        $databaseConnection = Database::getPDO();
+        $query = $databaseConnection->prepare('INSERT INTO `appointments` (dateHour, idPatients) VALUES (:dateHour, :id);');
+        $query->bindValue(':dateHour', $this->getDate(), PDO::PARAM_STR);
+        $query->bindValue(':id', $this->getId(), PDO::PARAM_INT);
+        $query->execute();
         return true;
     }
 }

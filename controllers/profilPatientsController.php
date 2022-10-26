@@ -20,24 +20,22 @@ if (Patient::verifyIfIdExists() == true) {
     $patient = Patient::specificInformations();
     // Si le formulaire est soumis
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        if (Database::validationInput($_POST['lastname'], REGEX_NAME) == true &&
-        Database::validationInput($_POST['firstname'], REGEX_NAME) == true &&
-        Database::validationInput($_POST['birthdate'], REGEX_BIRTHDATE) == true &&
-        Database::validationInput($_POST['phone'], REGEX_PHONE) == true && 
-        Database::validationInput($_POST['mail'], REGEX_MAIL) == true &&
-        Database::validationInput($_POST['gender'], REGEX_GENDER) == true) {
+        $profil = new Patient('lastName', 'firstName', 'birthDate', 'phone', 'mail', 'gender');
+        if (Database::validationInput($profil->getLastName(), REGEX_NAME) == true &&
+        Database::validationInput($profil->getFirstName(), REGEX_NAME) == true &&
+        Database::validationInput($profil->getBirthDate(), REGEX_BIRTHDATE) == true &&
+        Database::validationInput($profil->getPhone(), REGEX_PHONE) == true && 
+        Database::validationInput($profil->getMail(), REGEX_MAIL) == true &&
+        Database::validationInput($profil->getGender(), REGEX_GENDER) == true) {
             //Instanciation de l'objet patient
-            $patient = new Patient('lastname', 'firstname', 'birthdate', 'phone', 'mail', 'gender');
             // Modification des informations du patient
-            $modifyInformationsRequest = 'UPDATE `patients` SET `lastname` = :lastname, `firstname` = :firstname, `birthdate` = :birthdate, `phone` = :phone, `mail` = :mail, `gender` = :gender WHERE `id` = :id';
-            
-            $profil->modifyInformation($modifyInformationsRequest);
+            $profil->modifyInformation(intval($_GET['id'], 10));
             // Redirection vers la page de profil du patient
-            header('Location: /profil?id='.$profil->getId());
+            header('Location: /profil?id='.$_GET['id']);
             exit();
         } else {
-            // Message d'erreur 
-            $error = 'Veuillez remplir correctement les champs';
+            // Message d'erreur
+            var_dump('Veuillez remplir correctement les champs');
         }
     }
 } else {
@@ -48,6 +46,7 @@ if (Patient::verifyIfIdExists() == true) {
 
 // Appel des vues
 include(__DIR__.'/../views/templates/header.php');
+
 if (isset($_GET['modify'])) {
     include(__DIR__.'/../views/profilPatientsModify.php');
 } else {

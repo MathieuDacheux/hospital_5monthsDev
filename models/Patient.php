@@ -3,12 +3,12 @@
 class Patient {
 
     // Propriétés
-    private $firstname;
-    private $lastname;
-    private $birthdate;
-    private $phone;
-    private $mail;
-    private $gender;
+    protected $firstname;
+    protected $lastname;
+    protected $birthdate;
+    protected $phone;
+    protected $mail;
+    protected $gender;
 
     public function __construct($firstname, $lastname, $birthdate, $phone, $mail, $gender) {
         $this->firstname = trim(filter_input(INPUT_POST, $firstname, FILTER_SANITIZE_SPECIAL_CHARS));
@@ -114,10 +114,15 @@ class Patient {
        return $this->mail;
     }
 
+    /**
+     * Settings du genre
+     * @param mixed $gender
+     * 
+     * @return void
+     */
     public function setGender ($gender) :void {
         $this->gender = trim(filter_input(INPUT_POST, $gender, FILTER_SANITIZE_NUMBER_INT));
     }
-
     /**
      * Retourne le genre du patient
      * @return string
@@ -162,7 +167,8 @@ class Patient {
         $query->bindValue(':lastname', $this->getLastName(), PDO::PARAM_STR);
         $query->bindValue(':firstname', $this->getFirstName(), PDO::PARAM_STR);
         $query->bindValue(':birthdate', $this->getBirthDate(), PDO::PARAM_STR);
-        $result = $query->execute();
+        $query->execute();
+        $result = $query->fetch(PDO::FETCH_OBJ);
         if ($result == true) {
             return true;
         } else {
@@ -241,7 +247,7 @@ class Patient {
         return $result;
     }
 
-        /**
+    /**
      * Vérifie si l'ID du patient existe
      * @return bool
      */
@@ -283,21 +289,21 @@ class Patient {
      * Update des informations du patient
      * @return bool
      */
-    public static function modifyInformation () :bool {
+    public function modifyInformation ($id) :bool {
         // Connexion à la base de données
         $databaseConnection = Database::getPDO();
         // Requête SQL
         $query = $databaseConnection->prepare('UPDATE `patients` SET `lastname` = :lastname, `firstname` = :firstname, `birthdate` = :birthdate, `phone` = :phone, `mail` = :mail, `gender` = :gender WHERE `id` = :id ;');
-        $query->bindValue(':lastname', $_POST['lastname'], PDO::PARAM_STR);
-        $query->bindValue(':firstname', $_POST['firstname'], PDO::PARAM_STR);
-        $query->bindValue(':birthdate', $_POST['birthdate'], PDO::PARAM_STR);
-        $query->bindValue(':phone', $_POST['phone'], PDO::PARAM_STR);
-        $query->bindValue(':mail', $_POST['mail'], PDO::PARAM_STR);
-        $query->bindValue(':gender', $_POST['gender'], PDO::PARAM_STR);
-        $query->bindValue(':id', $_GET['id'], PDO::PARAM_INT);
-        $result = $query->execute();
+        $query->bindValue(':lastname', $this->getLastName(), PDO::PARAM_STR);
+        $query->bindValue(':firstname', $this->getFirstName(), PDO::PARAM_STR);
+        $query->bindValue(':birthdate', $this->getBirthDate(), PDO::PARAM_STR_CHAR);
+        $query->bindValue(':phone', $this->getPhone(), PDO::PARAM_STR);
+        $query->bindValue(':mail', $this->getMail(), PDO::PARAM_STR);
+        $query->bindValue(':gender', $this->getGender(), PDO::PARAM_STR);
+        $query->bindValue(':id', $id, PDO::PARAM_INT);
+        $query->execute();
         // Récupération du résultat
-        $resultInformations = $result->fetch(PDO::FETCH_OBJ);
+        $resultInformations = $query->fetch(PDO::FETCH_OBJ);
         return $resultInformations;
     }
 }
