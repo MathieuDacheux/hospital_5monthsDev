@@ -42,7 +42,7 @@ class DisplaySpecific extends Database {
      */
     public function verifyIfIdExists ($requestSQL) :bool {
         if ($this->validationInput($this->getId(), REGEX_ID) == true) {
-            $databaseConnection = parent::getPDO();
+            $databaseConnection = Database::getPDO();
             $queryResult = $databaseConnection->prepare($requestSQL);
             $queryResult->execute();
             $result = $queryResult->fetch(PDO::FETCH_OBJ);
@@ -62,7 +62,7 @@ class DisplaySpecific extends Database {
      */
     public function specificInformations ($requestSQL) :array {
         // Connexion à la base de données
-        $databaseConnection = parent::getPDO();
+        $databaseConnection = Database::getPDO();
         // Requête SQL
         $result = $databaseConnection->query($requestSQL);
         // Récupération du résultat

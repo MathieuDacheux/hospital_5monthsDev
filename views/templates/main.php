@@ -38,13 +38,13 @@
                 </div>
                 <div class="containerEmployees flexCenterColumn">
                     <?php for ($i = 0; $i <= 5; $i++) : ?>
-                        <?php if (isset($appointment[$i])) : ?>
+                        <?php if (isset($appointments[$i])) : ?>
                             <div class="employeeRecap flexCenterBetween">
                                 <div class="containerPicture flexCenterCenter">
                                     <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80" alt="Photo du patient">
                                 </div>
                                 <div class="containerName">
-                                    <p><?= $appointment[$i]->lastname ?> <?= $appointment[$i]->firstname ?></p>
+                                    <p><?= $appointments[$i]->dateHour ?> <?= $appointment[$i]->idPatients ?></p>
                                 </div>
                                 <div class="containerInformations flexCenterCenter">
                                     <div class="containerPlus flexCenterCenter">

@@ -73,9 +73,9 @@ class Database {
      * Retourne la connexion à la base de données
      * @return PDO
      */
-    public function getPDO(): PDO {
+    public static function getPDO(): PDO {
         try {
-            $connectionDatabase = new PDO('mysql:host=' . $this->getHost() . ';dbname=' . $this->getDatabase() . ';charset=' . $this->getCharset(), $this->getUser(), $this->getPassword());
+            $connectionDatabase = new PDO('mysql:host=' . HOST . ';dbname=' . DATABASE . ';charset=' . CHARSET, USER, PASSWORD);
             return $connectionDatabase;
         } catch (PDOException $ex) {
             die('Erreur : ' . $ex->getMessage());

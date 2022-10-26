@@ -15,11 +15,8 @@ $description = HEAD_DESCRIPTION[0];
 $getAllRequestPatients = 'SELECT `lastname`, `firstname`, `id` FROM `patients` ORDER BY `id` DESC';
 $getAllRequestAppointments = 'SELECT `dateHour`, `idPatients`, `id` FROM `appointments` ORDER BY `id` DESC';
 
-
-
 // Appel de la méthode statique getAll
-$patients = RegisterPatient::getAll($getAllRequestPatients);
-$appointment = $displayAll->getAll($getAllRequestAppointments);
+$patients = Patient::getAll();
 
 // Appel des vues
 

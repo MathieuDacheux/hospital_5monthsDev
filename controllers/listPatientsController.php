@@ -7,7 +7,7 @@ require_once(__DIR__.'/../helpers/functions.php');
 
 // Appel des models
 require_once(__DIR__.'/../models/Database.php');
-require_once(__DIR__.'/../models/DisplayAll.php');
+require_once(__DIR__.'/../models/Patient.php');
 
 // Appel des fonctions
 
@@ -15,16 +15,12 @@ require_once(__DIR__.'/../models/DisplayAll.php');
 $title = HEAD_TITLE[1];
 $description = HEAD_DESCRIPTION[1];
 
-$getByTenRequest = 'SELECT * FROM `patients` ORDER BY `id` ASC LIMIT :numberPerPage OFFSET :offset';
-
-// Instanciation de la classe DisplayList
-$displayPatient = new DisplayAll();
-// Récupération du nombre de pages
-$totalPages = $displayPatient->howManyPages($howManyPagesRequest);
-// Récupération de la page actuelle
-$page = $displayPatient->setPage();
-// Récupération de la liste des patients
-$patientsList = $displayPatient->getByTen($getByTenRequest);
+// Récupération du nombre de pages avec la méthode statique howManyPages
+$totalPages = Patient::howManyPages();
+// Récupération de la page actuelle avec la méthode statique getPage
+$page = Patient::setPage();
+// Récupération de la liste des patients par page avec la méthode statique getByTen
+$patientsList = Patient::getByTen();
 
 // Appel des vues
 include(__DIR__.'/../views/templates/header.php');

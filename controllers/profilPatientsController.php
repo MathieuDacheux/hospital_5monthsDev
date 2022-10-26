@@ -7,7 +7,7 @@ require_once(__DIR__.'/../helpers/functions.php');
 
 // Appel des models
 require_once(__DIR__.'/../models/Database.php');
-require_once(__DIR__.'/../models/displaySpecific.php');
+require_once(__DIR__.'/../models/Patient.php');
 
 // Appel des fonctions
 
@@ -15,21 +15,22 @@ require_once(__DIR__.'/../models/displaySpecific.php');
 $title = HEAD_TITLE[2];
 $description = HEAD_DESCRIPTION[2];
 
-// Instanciation de la classe Profil
-$profil = new DisplaySpecific();
-
-// Filtrage de l'ID reçu en GET
-$verifyIfIdExistsRequest = 'SELECT `id` FROM `patients` WHERE `id` = '.$profil->getId().' ;';
-if ($profil->verifyIfIdExists($verifyIfIdExistsRequest) == true) {
+if (Patient::verifyIfIdExists() == true) {
     // Si la donnée est valide, récupération des informations du patient
-    $specificInformationsRequest = 'SELECT * FROM `patients` WHERE `id` = '.$profil->getId().' ;';
-    $patient = $profil->specificInformations($specificInformationsRequest);
+    $patient = Patient::specificInformations();
     // Si le formulaire est soumis
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        if ($profil->validationInput($_POST['phone'], REGEX_PHONE) == true &&
-        $profil->validationInput($_POST['mail'], REGEX_MAIL) == true) {
+        if (Database::validationInput($_POST['lastname'], REGEX_NAME) == true &&
+        Database::validationInput($_POST['firstname'], REGEX_NAME) == true &&
+        Database::validationInput($_POST['birthdate'], REGEX_BIRTHDATE) == true &&
+        Database::validationInput($_POST['phone'], REGEX_PHONE) == true && 
+        Database::validationInput($_POST['mail'], REGEX_MAIL) == true &&
+        Database::validationInput($_POST['gender'], REGEX_GENDER) == true) {
+            //Instanciation de l'objet patient
+            $patient = new Patient('lastname', 'firstname', 'birthdate', 'phone', 'mail', 'gender');
             // Modification des informations du patient
-            $modifyInformationsRequest = 'UPDATE `patients` SET `phone` = "'.$profil->getPhone().'", `mail` = "'.$profil->getMail().'" WHERE `id` = '.$profil->getId().' ;';
+            $modifyInformationsRequest = 'UPDATE `patients` SET `lastname` = :lastname, `firstname` = :firstname, `birthdate` = :birthdate, `phone` = :phone, `mail` = :mail, `gender` = :gender WHERE `id` = :id';
+            
             $profil->modifyInformation($modifyInformationsRequest);
             // Redirection vers la page de profil du patient
             header('Location: /profil?id='.$profil->getId());
