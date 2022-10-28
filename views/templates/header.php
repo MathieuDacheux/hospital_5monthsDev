@@ -30,7 +30,7 @@
             <ul class="mobileNavList flexCenterCenterColumn">
                 <li>
                     <i class="fa-regular fa-square-check"></i>
-                    <span><a href="/nouveau-rendez-vous">Nouveau</a></span>
+                    <span><a href="/nouveau">Nouveau</a></span>
                 </li>
                 <li>
                     <i class="fa-regular fa-calendar"></i>
@@ -51,7 +51,7 @@
                 <div class="containerList">
                     <li>
                         <i class="fa-regular fa-calendar"></i>
-                        <span><a href="/nouveau-rendez-vous">Nouveau</a></span>
+                        <span><a href="/nouveau">Nouveau</a></span>
                         
                     </li>
                 </div>

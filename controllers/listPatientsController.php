@@ -44,6 +44,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $confirmation = 'Le patient existe déjà';
         } else {
             $confirmation = 'Le patient a bien été ajouté';
+            header('Location: /patients');
         }
         // Affichage du message de succès
     } else {

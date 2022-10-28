@@ -60,7 +60,7 @@ class Database {
         if(empty($input)) {
             return false;
         } else {
-            $isOk = filter_var($input, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => $REGEX)));
+            $isOk = filter_var($input, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/'.$REGEX.'/')));
             if (!$isOk) {
                 return false;
             } else {

@@ -12,7 +12,7 @@
             <div class="formInput flexCenterCenterColumn">
                 <div class="formName flexCenterColumn">
                     <div class="flexCenterColumn">
-                        <input type="datetime-local" name="appointement" value="<?= $firstname ?? '' ?>" pattern="<?= '/'.REGEX_NAME.'/' ?>" required>
+                        <input type="datetime-local" name="appointement" value="<?= $firstname ?? '' ?>" pattern="<?= REGEX_NAME ?>" required>
                     </div>
                     <select name="id" id="id">
                         <?php foreach($patientsAll as $patient) : ?>

@@ -16,6 +16,13 @@ require_once(__DIR__.'/../models/Appointment.php');
 $title = HEAD_TITLE[2];
 $description = HEAD_DESCRIPTION[2];
 
+$style = '<link rel="stylesheet" href="../public/css/main.css">
+    <link rel="stylesheet" href="../public/css/leftbar.css">
+    <link rel="stylesheet" href="../public/css/profil.css">
+    <link rel="stylesheet" href="../public/css/rightbar.css">';
+
+$javascript = '<script defer src="../public/js/openModal.js"></script>';
+
 if (Patient::verifyIfIdExists() == true) {
     // Si la donnée est valide, récupération des informations du patient
     $patient = Patient::specificInformations();

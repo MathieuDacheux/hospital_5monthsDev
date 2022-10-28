@@ -12,15 +12,15 @@
             <div class="formInput flexCenterCenterColumn">
                 <div class="formName flexCenterBetween">
                     <div class="flexCenterCenterColumn">
-                        <input type="text" placeholder="Nom*" name="lastname" value="<?= $lastname ?? '' ?>" pattern="<?= '/'.REGEX_NAME.'/' ?>" required>
+                        <input type="text" placeholder="Nom*" name="lastName" value="<?= $lastname ?? '' ?>" pattern="<?= REGEX_NAME ?>" required>
                     </div>
                     <div class="flexCenterColumn">
-                        <input type="text" placeholder="Prénom*" name="firstname" value="<?= $firstname ?? '' ?>" pattern="<?= '/'.REGEX_NAME.'/' ?>" required>
+                        <input type="text" placeholder="Prénom*" name="firstName" value="<?= $firstname ?? '' ?>" pattern="<?= REGEX_NAME ?>" required>
                     </div>
                 </div>
-                <input type="date" name="birthDate" value="<?= $birthdate ?? '' ?>" pattern="<?= '/'.REGEX_BIRTHDATE.'/' ?>">
-                <input type="tel" placeholder="Téléphone*" name="phone" value="<?= $phone ?? '' ?>" pattern="<?= '/'.REGEX_PHONE.'/' ?>" required>
-                <input type="text" placeholder="exemple@email.com" name="mail" value="<?= $income ?? '' ?>" pattern="<?= '/'.REGEX_MAIL.'/' ?>" required>
+                <input type="date" name="birthDate" value="<?= $birthdate ?? '' ?>" pattern="<?= REGEX_BIRTHDATE ?>">
+                <input type="tel" placeholder="Téléphone*" name="phone" value="<?= $phone ?? '' ?>" pattern="<?= REGEX_PHONE ?>" required>
+                <input type="text" placeholder="exemple@email.com" name="mail" value="<?= $income ?? '' ?>" pattern="<?= REGEX_MAIL ?>" required>
                 <select name="gender" id="gender">
                     <option value="1">Homme</option>
                     <option value="2">Femme</option>

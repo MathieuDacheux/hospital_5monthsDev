@@ -1,8 +1,7 @@
 RewriteEngine On
 
 RewriteRule ^accueil$ controllers/homeController.php
-RewriteRule ^nouveau-patient$ controllers/addPatientController.php
 RewriteRule ^patients controllers/listPatientsController.php
 RewriteRule ^profil controllers/profilPatientController.php
-RewriteRule ^nouveau-rendez-vous$ controllers/addAppointmentController.php
+RewriteRule ^nouveau$ controllers/addAppointmentController.php
 RewriteRule ^rendez-vous controllers/listAppointmentsController.php
