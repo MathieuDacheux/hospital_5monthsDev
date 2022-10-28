@@ -151,7 +151,7 @@ class Appointment {
         $databaseConnection = Database::getPDO();
         // Requête SQL
         $query = $databaseConnection->prepare('SELECT `patients`.`lastname`, `patients`.`firstname`, `patients`.`id`, `appointments`.`dateHour` FROM `appointments` LEFT JOIN `patients` ON `appointments`.`idPatients` = `patients`.`id` ORDER BY `dateHour` ASC LIMIT :numberPerPage OFFSET :offset ;');
-        $query->bindValue(':numberPerPage', 10, PDO::PARAM_INT);
+        $query->bindValue(':numberPerPage', 9, PDO::PARAM_INT);
         $query->bindValue(':offset', (Appointment::howManyPages() - 1) * 10, PDO::PARAM_INT);
         $query->execute();
         // Récupération du résultat

@@ -1,20 +1,67 @@
-<!-- Section Main -->
 <main>
-    <!-- Information du patient choisi -->
-    <section class="containerCentral flexCenterCenterColumn">
-        <div class="containerListingPatients flexCenterColumn">
+
+    <!-- Modal ajout client -->
+    <div class="formContent hidden">
+        <div class="formContentTitle flexCenterCenter">
+            <div class="containerAdd flexCenterCenter">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+            <h3>Ajout d'un patient</h3>
+        </div>
+        <form method="POST">
+            <div class="formInput flexCenterCenterColumn">
+                <div class="formName flexCenterBetween">
+                    <div class="flexCenterCenterColumn">
+                        <input type="text" placeholder="Nom*" name="lastname" value="<?= $lastname ?? '' ?>" pattern="<?= '/'.REGEX_NAME.'/' ?>" required>
+                    </div>
+                    <div class="flexCenterColumn">
+                        <input type="text" placeholder="Prénom*" name="firstname" value="<?= $firstname ?? '' ?>" pattern="<?= '/'.REGEX_NAME.'/' ?>" required>
+                    </div>
+                </div>
+                <input type="date" name="birthDate" value="<?= $birthdate ?? '' ?>" pattern="<?= '/'.REGEX_BIRTHDATE.'/' ?>">
+                <input type="tel" placeholder="Téléphone*" name="phone" value="<?= $phone ?? '' ?>" pattern="<?= '/'.REGEX_PHONE.'/' ?>" required>
+                <input type="text" placeholder="exemple@email.com" name="mail" value="<?= $income ?? '' ?>" pattern="<?= '/'.REGEX_MAIL.'/' ?>" required>
+                <select name="gender" id="gender">
+                    <option value="1">Homme</option>
+                    <option value="2">Femme</option>
+                </select>
+            </div>
+        
+            <!-- Button to submit form -->
+        
+            <div class="registerButton flexCenterCenter">
+                <button type="submit">Ajouter</button>
+            </div>
+        </form>
+    </div>
+
+
+    <!-- Listage des clients  -->
+    <div class="containerSubject">
+        <div class="containerTitle flexCenterCenter">
+            <div class="containerAdd flexCenterCenter">
+                <i class="fa-solid fa-plus"></i>
+            </div>
+            <h3>Patients</h3>
+        </div>
+        <div class="containerContent flexCenterColumn">
             <?php if (isset($patientsList)) :?>
                 <?php foreach ($patientsList as $information) :?>
-                    <div class="patientCard flexCenterCenterColumn">
-                        <div class="containerPatient flexCenterBetween">
-                            <div class="containerName">
-                                <p><?= $information->lastname ?> <?= $information->firstname ?></p>
-                            </div>
-                            <div class="containerLinkList">
-                                <a href="/profil?id=<?= $information->id ?>">Voir le profil</a>
-                            </div>
+                <div class="listingRecap flexCenterBetween">
+                    <div class="containerInformations">
+                        <div class="containerPicture">
+                            <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80" alt="">
+                        </div>
+                        <div class="containerName">
+                            <p><?= $information->lastname ?> <?= $information->firstname ?></p>
                         </div>
                     </div>
+                    <div class="containerMore flexCenterCenter">
+                        <div class="containerPlus flexCenterCenter">
+                            <a href="/profil?id=<?= $information->id ?>"><i class="fa-regular fa-eye"></i></a>
+                        </div>
+                    </div>      
+                </div>
                 <?php endforeach ?>
             <?php endif ?>
             <div class="containerListingPages">
@@ -29,5 +76,5 @@
                 <?php endfor ?>
             </div>
         </div>
-    </section>
+    </div>
 </main>

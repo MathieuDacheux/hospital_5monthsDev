@@ -15,6 +15,13 @@ $title = HEAD_TITLE[0];
 $description = HEAD_DESCRIPTION[0];
 $getAllRequestPatients = 'SELECT `lastname`, `firstname`, `id` FROM `patients` ORDER BY `id` DESC';
 $getAllRequestAppointments = 'SELECT `dateHour`, `idPatients`, `id` FROM `appointments` ORDER BY `id` DESC';
+$style = '<link rel="stylesheet" href="../public/css/main.css">
+    <link rel="stylesheet" href="../public/css/leftbar.css">
+    <link rel="stylesheet" href="../public/css/dashboard.css">
+    <link rel="stylesheet" href="../public/css/rightbar.css">';
+
+$javascript = '<script defer src="../public/js/openModal.js"></script>
+        <script defer src="../public/js/openNavbar.js"></script>';
 
 // Appel de la méthode statique getAll de la classe Patient
 $patients = Patient::getAll();
