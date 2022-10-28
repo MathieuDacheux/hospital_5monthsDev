@@ -30,7 +30,8 @@
                 <?php endif ?>
             </div>
             <div class="containerButton flexCenterCenter">
-                <a href="profil?id=<?= $information->id ?>&amp;modify=true"">Modifier le patient</a>
+                <a href="profil-?id=<?= $information->id ?>&amp;modify=true"">Modifier le patient</a>
+                <a href="profil-?id=<?= $information->id ?>&amp;delete=true"">Supprimer le patient</a>
             </div>
         </div>
         <div class="containerForm">

@@ -138,6 +138,8 @@ class Appointment {
         $totalPages = intdiv($resultTotal->total, 10);
         if ($resultTotal->total % 10 != 0) {
             $totalPages++;
+        } else if ($totalPages == 0) {
+            $totalPages = 1;
         }
         return $totalPages;
     }
@@ -205,6 +207,25 @@ class Appointment {
             $queryResult->execute();
             $result = $queryResult->fetchAll(PDO::FETCH_OBJ);
             return $result;
+        } else {
+            return false;
+        }
+    }
+
+    //********************************************** **********************************************/
+    //******************************************* DELETE ******************************************/
+    //********************************************** **********************************************/
+
+    /**
+     * Supprime un rendez-vous
+     * @return bool
+     */
+    public static function deleteAppointmentByPatient () :bool {
+        if (Database::validationInput($_GET['id'] , REGEX_ID) == true) {
+            $databaseConnection = Database::getPDO();
+            $queryResult = $databaseConnection->prepare('DELETE FROM `appointments` WHERE `idPatients` = '.$_GET['id'].' ;');
+            $queryResult->execute();
+            return true;
         } else {
             return false;
         }

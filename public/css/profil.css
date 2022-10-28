@@ -69,13 +69,24 @@ main {
     height: 75px;
 }
 
-.containerButton a {
+.containerButton a:first-child {
     padding : .5rem 1rem;
     background-color: var(--black0);
     border-radius: 5px;
     color: var(--primary100);
     font-size: 1.25rem;
+    margin-right: 1rem;
 }
+
+.containerButton a:last-child {
+    padding : .5rem 1rem;
+    background-color: var(--black0);
+    border-radius: 5px;
+    color: var(--error100);
+    margin-left: 1rem;
+    font-size: 1rem;
+}
+
 
 .containerForm {
     width: 100%;

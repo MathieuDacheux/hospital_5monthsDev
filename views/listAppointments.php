@@ -61,14 +61,20 @@
             <?php endif ?>
             <div class="containerListingPages">
                 <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
-                    <?php if ($i == $page - 1) : ?>
-                        <a href="/patients?page=<?= $i ?>" class="pageBefore"><?= $i ?></a>
-                    <?php elseif ($i == $page) : ?>
-                        <a href="/patients?page=<?= $i ?>" class="pageActive"><?= $i ?></a>
-                    <?php elseif ($i == $page +1): ?>
-                        <a href="/patients?page=<?= $i ?>" class="pageAfter"><?= $i ?></a>
+                    <?php if ($totalPages == 1 || $totalPages == 0) : ?>
+                        <p></p>
+                    <?php else : ?>
+                        <?php if ($totalPages >= 2) : ?>
+                            <?php if ($i == $page - 1) : ?>
+                                <a href="/patients?page=<?= $i ?>" class="pageBefore"><?= $i ?></a>
+                            <?php elseif ($i == $page) : ?>
+                                <a href="/patients?page=<?= $i ?>" class="pageActive"><?= $i ?></a>
+                            <?php elseif ($i == $page +1): ?>
+                                <a href="/patients?page=<?= $i ?>" class="pageAfter"><?= $i ?></a>
+                            <?php endif; ?>
+                        <?php endif; ?>
                     <?php endif; ?>
-                <?php endfor ?>
+                <?php endfor; ?>
             </div>
         </div>
     </div>

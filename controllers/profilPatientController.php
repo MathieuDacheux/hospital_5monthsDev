@@ -18,7 +18,7 @@ $description = HEAD_DESCRIPTION[2];
 
 $style = '<link rel="stylesheet" href="../public/css/main.css">
     <link rel="stylesheet" href="../public/css/leftbar.css">
-    <link rel="stylesheet" href="../public/css/profil.css">
+    <link rel="stylesheet" href="../public/css/settingsModify.css">
     <link rel="stylesheet" href="../public/css/rightbar.css">';
 
 $javascript = '<script defer src="../public/js/openModal.js"></script>';
@@ -54,12 +54,32 @@ if (Patient::verifyIfIdExists() == true) {
     exit();
 }
 
-// Appel des vues
-include(__DIR__.'/../views/templates/header.php');
+// Suppression du patient et ses rendez-vous
+if (isset($_GET['delete']) == true) {
+    // Suppression des rendez-vous du patient
+    Appointment::deleteAppointmentByPatient();
+    // Suppression du patient
+    Patient::deletePatient();
+    // Redirection vers le listing de tous les patients
+    header('Location: /patients');
+    exit();
+}
 
-if (isset($_GET['modify'])) {
+// Appel des vues
+
+if (isset($_GET['modify']) == true) {
+    $style = '<link rel="stylesheet" href="../public/css/main.css">
+    <link rel="stylesheet" href="../public/css/leftbar.css">
+    <link rel="stylesheet" href="../public/css/settingsModify.css">
+    <link rel="stylesheet" href="../public/css/rightbar.css">';
+    include(__DIR__.'/../views/templates/header.php');
     include(__DIR__.'/../views/profilPatientModify.php');
 } else {
+    $style = '<link rel="stylesheet" href="../public/css/main.css">
+    <link rel="stylesheet" href="../public/css/leftbar.css">
+    <link rel="stylesheet" href="../public/css/profil.css">
+    <link rel="stylesheet" href="../public/css/rightbar.css">';
+    include(__DIR__.'/../views/templates/header.php');
     include(__DIR__.'/../views/profilPatient.php');
 }
 

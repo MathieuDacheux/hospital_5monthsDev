@@ -307,4 +307,24 @@ class Patient {
         $resultInformations = $query->fetch(PDO::FETCH_OBJ);
         return $resultInformations;
     }
+
+    //********************************************** **********************************************/
+    //******************************************* DELETE ******************************************/
+    //********************************************** **********************************************/
+
+    /**
+     * Supprime le patient
+     * @return bool
+     */
+    public static function deletePatient () :bool {
+        // Connexion à la base de données
+        $databaseConnection = Database::getPDO();
+        // Requête SQL
+        $query = $databaseConnection->prepare('DELETE FROM `patients` WHERE `id` = :id ;');
+        $query->bindValue(':id', $_GET['id'], PDO::PARAM_INT);
+        $query->execute();
+        // Récupération du résultat
+        $resultInformations = $query->fetch(PDO::FETCH_OBJ);
+        return $resultInformations;
+    }
 }
