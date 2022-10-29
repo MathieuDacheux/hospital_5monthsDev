@@ -5,7 +5,7 @@
 const searchInput = document.querySelector('.searchBar');
 
 // Autocomplete on search bar inside Patients List with SQL ajax request
-searchInput.addEventListener('keyup', function() {
+searchInput.addEventListener('input', function() {
     let inputValue = searchInput.value;
     let renderResult = document.querySelector('.containerContent');
     let tamponContainer = document.querySelector('.renderResult');
@@ -16,10 +16,8 @@ searchInput.addEventListener('keyup', function() {
         xhr.onload = function() {
             if (this.status == 200) {
                 tamponContainer.innerHTML = this.responseText;
-                // Search inside renderResult the container with class listingRecap
                 let searchResultContainer = tamponContainer.querySelectorAll('.listingRecap');
-                console.log(inputValue);
-                // Create a new container to display the search result
+                let containerListingPages = document.querySelector('.containerListingPages');
                 renderResult.innerHTML = '';
                 searchResultContainer.forEach(element => {
                     renderResult.appendChild(element);
@@ -27,9 +25,8 @@ searchInput.addEventListener('keyup', function() {
             }
         }
         xhr.send();
-        console.log(xhr.send());
     } else {
-        renderResult.style.display = 'none';
+        renderResult.style.display = 'block';
     }
 });
 

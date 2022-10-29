@@ -203,6 +203,10 @@ form {
     border: 2px solid var(--primary80);
 }
 
+.formInput input[type="datetime-local"] {
+    width: 100%;
+}
+
 .formName {
     width: 90%;
     margin-bottom: .25rem;
@@ -216,9 +220,14 @@ form {
     width: 99%;
 }
 
+#id {
+    width: 80%;
+}
+
 .formName .errorMessage {
     width: 99%;
     margin: 0;
+    text-align: center;
 }
 
 /* Submit button */

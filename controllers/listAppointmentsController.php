@@ -21,7 +21,8 @@ $style = '<link rel="stylesheet" href="../public/css/main.css">
     <link rel="stylesheet" href="../public/css/rightbar.css">';
 
 $javascript = '<script defer src="../public/js/openModal.js"></script>
-            <script defer src="../public/js/openNavbar.js"></script>';
+            <script defer src="../public/js/openNavbar.js"></script>
+            <script defer src="../public/js/showResult.js"></script>';
 
 // Récupération du nombre de pages avec la méthode statique howManyPages
 $totalPages = Appointment::howManyPages();
@@ -35,22 +36,25 @@ $patientsAll = Patient::getAll();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Instanciation de la classe RegisterAppointement
     $registerAppointement = new Appointment('dateHour', 'id');
-    if (Database::validationInput($registerAppointement->getDate(), REGEX_DATETIME) && 
-    Database::validationInput($registerAppointement->getId(), REGEX_ID)) {
-        if ($registerAppointement->idExists() == true) {
-            if ($registerAppointement->datetimeIsAvailable() == true) {
-                $registerAppointement->addAppointement();
-                $confirmation = 'Le rendez-vous a bien été enregistré';
-            } else {
-                $error = 'La date et l\'heure du rendez-vous ne sont pas disponibles';
-            }
-        } else {
-            $error = 'Le patient n\'existe pas';
+    if (Database::validationInput($registerAppointement->getDate(), REGEX_DATETIME) == false ) {
+        $errorsRegistration['dateHour'] = 'La date et l\'heure ne sont pas valides';
+    }
+    if (Database::validationInput($registerAppointement->getId(), REGEX_ID) == false ) {
+        $errorsRegistration['id'] = 'La donnée n\'est pas valide';
+    }
+    if ($registerAppointement->idExists() == false) {
+        $errorsRegistration['id'] = 'Le patient n\'existe pas';
+    }
+    if (empty($errorsRegistration)) {
+        if ($registerAppointement->addAppointement() == true) {
+            $confirmation = true;
         }
     } else {
-        $error = 'Les données ne sont pas conformes';
+        $confirmation = false;
     }
 }
+
+
 
 // Appel des vues
 include(__DIR__.'/../views/templates/header.php');

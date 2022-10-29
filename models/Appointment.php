@@ -72,23 +72,6 @@ class Appointment {
     }
 
     /**
-     * Vérifie si la date du rendez-vous est disponible
-     * @return bool
-     */
-    function datetimeIsAvailable () :bool {
-        $databaseConnection = Database::getPDO();
-        $query = $databaseConnection->prepare('SELECT `dateHour` FROM `appointments` WHERE `dateHour` = :dateHour');
-        $query->bindValue(':dateHour', $this->getDate(), PDO::PARAM_STR);
-        $query->execute();
-        $result = $query->fetch(PDO::FETCH_OBJ);
-        if ($result != null) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    /**
      * Ajoute un nouveau rendez-vous dans la base de données
      * @return bool
      */
@@ -158,6 +141,7 @@ class Appointment {
         $query->execute();
         // Récupération du résultat
         $result = $query->fetchAll(PDO::FETCH_OBJ);
+        var_dump($result);
         return $result;
     }
 

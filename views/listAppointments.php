@@ -8,17 +8,19 @@
             </div>
             <h3>Nouveau rendez-vous</h3>
         </div>
-        <form method="POST">
+        <form method="POST" novalidate>
             <div class="formInput flexCenterCenterColumn">
-                <div class="formName flexCenterColumn">
-                    <div class="flexCenterColumn">
-                        <input type="datetime-local" name="appointement" value="<?= $firstname ?? '' ?>" pattern="<?= REGEX_NAME ?>" required>
-                    </div>
+                <div class="flexCenterColumn">
+                    <input type="datetime-local" name="appointement" value="<?= $_POST['dateHour'] ?? '' ?>" pattern="<?= REGEX_DATETIMELOCAL ?>" required>
+                    <p class="errorMessage"><?= (array_key_exists('dateHour', $errorsRegistration)) ? $errorsRegistration['dateHour'] : '' ?></p>
+                </div>
+                <div class="flexCenterCenterColumn">
                     <select name="id" id="id">
                         <?php foreach($patientsAll as $patient) : ?>
                             <option value="<?= $patient->id ?>"><?= $patient->lastname ?> <?= $patient->firstname ?></option>
                         <?php endforeach; ?>
                     </select>
+                    <p class="errorMessage"><?= (array_key_exists('id', $errorsRegistration)) ? $errorsRegistration['dateHour'] : '' ?></p>
                 </div>
             </div>
         
@@ -30,6 +32,20 @@
         </form>
     </div>
 
+    <?php if (isset($confirmation)) : ?>
+        <?php if($confirmation == true) :?>
+        <div class="showResult visible">
+            <p class="resultFormText">Le données ont bien été ajoutées</p>
+        </div>
+        <?php elseif ($confirmation == false) : ?>
+        <div class="showResult visible">
+            <p class="resultFormText">Les données fournies ne sont pas conformes</p>
+        </div>
+        <?php endif; ?>
+    <?php endif; ?>
+    <?php if (isset($isExist)) : ?>
+        <?= ($isExist == true) ? '<div class="showResult visible"><p class="resultFormText">Les données sont déjà présents dans la base</p></div>' : '' ;?>
+    <?php endif; ?>
 
     <!-- Listage des clients  -->
     <div class="containerSubject">
@@ -66,11 +82,11 @@
                     <?php else : ?>
                         <?php if ($totalPages >= 2) : ?>
                             <?php if ($i == $page - 1) : ?>
-                                <a href="/patients?page=<?= $i ?>" class="pageBefore"><?= $i ?></a>
+                                <a href="/rendez-vous?page=<?= $i ?>" class="pageBefore"><?= $i ?></a>
                             <?php elseif ($i == $page) : ?>
-                                <a href="/patients?page=<?= $i ?>" class="pageActive"><?= $i ?></a>
+                                <a href="/rendez-vous?page=<?= $i ?>" class="pageActive"><?= $i ?></a>
                             <?php elseif ($i == $page +1): ?>
-                                <a href="/patients?page=<?= $i ?>" class="pageBefore"><?= $i ?></a>
+                                <a href="/rendez-vous?page=<?= $i ?>" class="pageBefore"><?= $i ?></a>
                             <?php endif; ?>
                         <?php endif; ?>
                     <?php endif; ?>
