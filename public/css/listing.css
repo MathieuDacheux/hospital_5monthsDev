@@ -219,6 +219,17 @@ select {
     color: var(--black0);
 }
 
+.pageActive {
+    font-size: 1.25rem;
+    color: var(--black0);
+    margin: 0rem 1rem;
+}
+
+.pageBefore {
+    font-size: 1rem;
+    color: var(--black40);
+}
+
 .hidden {
     display: none;
 }
@@ -228,6 +239,33 @@ select {
         height: 100vh;
         width: calc(100vw - 200px);
     }
+    .containerSearch {
+        display: block;
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        border-radius: 5px;
+        width: 300px;
+        height: 30px;
+    }
+    
+    .containerSearch input {
+        width: 200px;
+        padding: .70rem .5em;
+        border-radius: 5px;
+        border: 2px solid var(--black40);
+        color: var(--black100);
+    }
+    
+    .containerSearch input::placeholder {
+        color: var(--black80);
+    }
+    
+    .containerSearch input:focus {
+        outline: none;
+        border: 2px solid var(--primary80);
+    }
+    
 }
 
 @media screen and (min-width: 1200px) {
@@ -235,5 +273,32 @@ select {
         height: 100vh;
         width: calc(100vw - 425px);
     }
+    .containerSearch {
+        display: block;
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        border-radius: 5px;
+        width: 300px;
+        height: 30px;
+    }
+    
+    .containerSearch input {
+        width: 200px;
+        padding: .70rem .5em;
+        border-radius: 5px;
+        border: 2px solid var(--black40);
+        color: var(--black100);
+    }
+    
+    .containerSearch input::placeholder {
+        color: var(--black80);
+    }
+    
+    .containerSearch input:focus {
+        outline: none;
+        border: 2px solid var(--primary80);
+    }
+    
 }
 

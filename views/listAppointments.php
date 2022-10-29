@@ -34,6 +34,9 @@
     <!-- Listage des clients  -->
     <div class="containerSubject">
         <div class="containerTitle flexCenterCenter">
+            <div class="containerSearch">
+                <input type="text" placeholder="Rechercher un patient">
+            </div>
             <div class="containerAdd flexCenterCenter">
                 <i class="fa-solid fa-plus"></i>
             </div>
@@ -70,7 +73,7 @@
                             <?php elseif ($i == $page) : ?>
                                 <a href="/patients?page=<?= $i ?>" class="pageActive"><?= $i ?></a>
                             <?php elseif ($i == $page +1): ?>
-                                <a href="/patients?page=<?= $i ?>" class="pageAfter"><?= $i ?></a>
+                                <a href="/patients?page=<?= $i ?>" class="pageBefore"><?= $i ?></a>
                             <?php endif; ?>
                         <?php endif; ?>
                     <?php endif; ?>

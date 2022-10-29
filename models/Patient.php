@@ -282,6 +282,18 @@ class Patient {
         return $resultInformations;
     }
 
+    public static function searchByName ($name) :array {
+        // Connexion à la base de données
+        $databaseConnection = Database::getPDO();
+        // Requête SQL
+        $query = $databaseConnection->prepare('SELECT * FROM `patients` WHERE `lastname` LIKE :search OR `firstname` LIKE :search ;');
+        $query->bindValue(':search', $name, PDO::PARAM_STR);
+        $query->execute();
+        // Récupération du résultat
+        $result = $query->fetchAll(PDO::FETCH_OBJ);
+        return $result;
+    }
+
     //********************************************** **********************************************/
     //******************************************* UPDATE ******************************************/
     //********************************************** **********************************************/

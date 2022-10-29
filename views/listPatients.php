@@ -1,7 +1,7 @@
 <main>
 
     <!-- Modal ajout client -->
-    <div class="formContent hidden">
+    <div class="formContent hidden formAddPatient">
         <div class="formContentTitle flexCenterCenter">
             <div class="containerAdd flexCenterCenter">
                 <i class="fa-solid fa-xmark"></i>
@@ -39,6 +39,11 @@
     <!-- Listage des clients  -->
     <div class="containerSubject">
         <div class="containerTitle flexCenterCenter">
+            <div class="containerSearch hidden">
+                <form action="patients?search=<?= isset($_GET['search']) ? $_GET['search'] : '' ?>">
+                    <input class="searchBar" type="text" name="search" value="<?= (isset($name)) ? $name : '' ?>" pattern="<?= REGEX_NAME ?>" placeholder="Rechercher un patient">
+                </form>
+            </div>
             <div class="containerAdd flexCenterCenter">
                 <i class="fa-solid fa-plus"></i>
             </div>
@@ -75,12 +80,15 @@
                             <?php elseif ($i == $page) : ?>
                                 <a href="/patients?page=<?= $i ?>" class="pageActive"><?= $i ?></a>
                             <?php elseif ($i == $page +1): ?>
-                                <a href="/patients?page=<?= $i ?>" class="pageAfter"><?= $i ?></a>
+                                <a href="/patients?page=<?= $i ?>" class="pageBefore"><?= $i ?></a>
                             <?php endif; ?>
                         <?php endif; ?>
                     <?php endif; ?>
                 <?php endfor; ?>
             </div>
         </div>
+    </div>
+    <div class="renderResult hidden">
+
     </div>
 </main>

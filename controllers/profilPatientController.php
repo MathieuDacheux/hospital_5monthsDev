@@ -21,7 +21,7 @@ $style = '<link rel="stylesheet" href="../public/css/main.css">
     <link rel="stylesheet" href="../public/css/settingsModify.css">
     <link rel="stylesheet" href="../public/css/rightbar.css">';
 
-$javascript = '<script defer src="../public/js/openModal.js"></script>';
+$javascript = '<script defer src="../public/js/openNavbar.js"></script>';
 
 if (Patient::verifyIfIdExists() == true) {
     // Si la donnée est valide, récupération des informations du patient

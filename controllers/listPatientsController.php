@@ -20,7 +20,8 @@ $style = '<link rel="stylesheet" href="../public/css/main.css">
     <link rel="stylesheet" href="../public/css/rightbar.css">';
 
 $javascript = '<script defer src="../public/js/openModal.js"></script>
-            <script defer src="../public/js/openNavbar.js"></script>';
+            <script defer src="../public/js/openNavbar.js"></script>
+            <script defer src="../public/js/autoComplete.js"></script>';
 
 // Récupération du nombre de pages avec la méthode statique howManyPages
 $totalPages = Patient::howManyPages();
@@ -28,6 +29,21 @@ $totalPages = Patient::howManyPages();
 $page = Patient::setPage();
 // Récupération de la liste des patients par page avec la méthode statique getByTen
 $patientsList = Patient::getByTen();
+
+if (isset ($_GET['search'])) {
+    if (Database::validationInput($_GET['search'], REGEX_NAME) == true) {
+        $name = $_GET['search'];
+        if (Patient::searchByName($name) == true) {
+            $patientsList = Patient::searchByName($name);
+        } else {
+            header('Location: /patients');
+            exit();         
+        }
+    } else {
+        header('Location: /patients');
+        exit();
+    }
+}
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Instanciation de la classe RegisterPatient

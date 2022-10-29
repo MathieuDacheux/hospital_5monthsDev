@@ -20,8 +20,7 @@ $style = '<link rel="stylesheet" href="../public/css/main.css">
     <link rel="stylesheet" href="../public/css/dashboard.css">
     <link rel="stylesheet" href="../public/css/rightbar.css">';
 
-$javascript = '<script defer src="../public/js/openModal.js"></script>
-        <script defer src="../public/js/openNavbar.js"></script>';
+$javascript = '<script defer src="../public/js/openNavbar.js"></script>';
 
 // Appel de la méthode statique getAll de la classe Patient
 $patients = Patient::getAll();
