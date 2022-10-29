@@ -11,7 +11,7 @@
         <form method="POST" novalidate>
             <div class="formInput flexCenterCenterColumn">
                 <div class="flexCenterColumn">
-                    <input type="datetime-local" name="appointement" value="<?= $_POST['dateHour'] ?? '' ?>" pattern="<?= REGEX_DATETIMELOCAL ?>" required>
+                    <input type="datetime-local" name="dateHour" value="<?= $_POST['dateHour'] ?? '' ?>" pattern="<?= REGEX_DATETIMELOCAL ?>" required>
                     <p class="errorMessage"><?= (array_key_exists('dateHour', $errorsRegistration)) ? $errorsRegistration['dateHour'] : '' ?></p>
                 </div>
                 <div class="flexCenterCenterColumn">
@@ -61,7 +61,7 @@
                 <div class="listingRecap flexCenterBetween">
                     <div class="containerInformations">
                         <div class="containerPicture">
-                            <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80" alt="">
+                            <img src="https://www.freeiconspng.com/uploads/patient-icon-png-19.png" alt="">
                         </div>
                         <div class="containerName">
                             <p><?= $information->firstname ?> <?= $information->lastname ?> le <?= date_format(date_create($information->dateHour), 'd/m') ?> à <?= date_format(date_create($information->dateHour), 'H:i') ?>h</p>

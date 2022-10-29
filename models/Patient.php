@@ -286,7 +286,7 @@ class Patient {
         // Connexion à la base de données
         $databaseConnection = Database::getPDO();
         // Requête SQL
-        $query = $databaseConnection->prepare('SELECT * FROM `patients` WHERE `lastname` LIKE :search OR `firstname` LIKE :search ;');
+        $query = $databaseConnection->prepare('SELECT * FROM `patients` WHERE `lastname` LIKE :search ORDER BY `id` DESC ;');
         $query->bindValue(':search', $name, PDO::PARAM_STR);
         $query->execute();
         // Récupération du résultat

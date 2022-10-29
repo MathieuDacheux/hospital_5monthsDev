@@ -85,7 +85,7 @@
                 <div class="listingRecap flexCenterBetween">
                     <div class="containerInformations">
                         <div class="containerPicture">
-                            <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80" alt="">
+                            <img src="https://www.freeiconspng.com/uploads/patient-icon-png-19.png" alt="">
                         </div>
                         <div class="containerName">
                             <p><?= $information->lastname ?> <?= $information->firstname ?></p>

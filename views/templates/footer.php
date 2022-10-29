@@ -1,3 +1,4 @@
+    <footer>
         <div class="containerRight">
             <div class="containerCalendar">
                 <div class="containerTitle flexCenterCenter">
@@ -33,8 +34,7 @@
                 </div>
             </div>
         </div>
-    </main>
-    
+    </footer>
     <!-- CDN Font Awesome -->
 
     <script src="https://kit.fontawesome.com/b274073d83.js" crossorigin="anonymous"></script>
