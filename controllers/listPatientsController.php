@@ -21,7 +21,8 @@ $style = '<link rel="stylesheet" href="../public/css/main.css">
 
 $javascript = '<script defer src="../public/js/openModal.js"></script>
             <script defer src="../public/js/openNavbar.js"></script>
-            <script defer src="../public/js/autoComplete.js"></script>';
+            <script defer src="../public/js/autoComplete.js"></script>
+            <script defer src="../public/js/showResult.js"></script>';
 
 // Récupération du nombre de pages avec la méthode statique howManyPages
 $totalPages = Patient::howManyPages();
@@ -49,23 +50,33 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Instanciation de la classe RegisterPatient
     $register = new Patient('firstName', 'lastName', 'birthDate', 'phone', 'mail', 'gender');
     // Validation des inputs soumis en méthode POST
-    if (Database::validationInput($register->getFirstName(), REGEX_NAME) == true && 
-    Database::validationInput($register->getLastName(), REGEX_NAME) == true && 
-    Database::validationInput($register->getBirthDate(), REGEX_BIRTHDATE) == true && 
-    Database::validationInput($register->getPhone(), REGEX_PHONE) == true && 
-    Database::validationInput($register->getMail(), REGEX_MAIL) == true && 
-    Database::validationInput($register->getGender(), REGEX_GENDER) == true) {
+    if (Database::validationInput($register->getFirstName(), REGEX_NAME) == false) {
+        $errorsRegistration['firstName'] = 'Données non conformes';
+    }
+    if (Database::validationInput($register->getLastName(), REGEX_NAME) == false) {
+        $errorsRegistration['lastName'] = 'Données non conformes';
+    }
+    if (Database::validationInput($register->getBirthDate(), REGEX_BIRTHDATE) == false) {
+        $errorsRegistration['birthDate'] = 'La date de naissance doit être au format JJ/MM/AAAA';
+    }
+    if (Database::validationInput($register->getPhone(), REGEX_PHONE) == false) {
+        $errorsRegistration['phone'] = 'Le numéro de téléphone doit être au format 0123456789';
+    }
+    if (Database::validationInput($register->getMail(), REGEX_MAIL) == false) {
+        $errorsRegistration['mail'] = 'L\'adresse mail n\'est pas valide';
+    }
+    if (Database::validationInput($register->getGender(), REGEX_GENDER) == false) {
+        $errorsRegistration['gender'] = 'Le genre n\'est pas valide';
+    }
+    if (empty($errorsRegistration)) {
         // Ajout du patient dans la base de données
         if ($register->checkPatient() == true) {
-            $confirmation = 'Le patient existe déjà';
+            $isExist = true;
         } else {
-            $confirmation = 'Le patient a bien été ajouté';
-            header('Location: /patients');
+            $confirmation = true;
         }
-        // Affichage du message de succès
     } else {
-        // Affichage du message d'erreur
-        $error = 'Veuillez remplir correctement le formulaire';
+        $confirmation = false;
     }
 }
 

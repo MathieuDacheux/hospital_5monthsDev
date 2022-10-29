@@ -34,7 +34,7 @@ main {
 }
 
 .formContentTitle .containerAdd {
-    background-color: var(--primary100);
+    background-color: var(--primary80);
 }
 
 .formContentTitle .containerAdd i{
@@ -56,6 +56,30 @@ main {
     height: calc(100% - 75px);
     padding: .5rem;
     overflow-y: scroll;
+}
+
+.showResult {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90%;
+    width: 100%;
+    transition: all .3s ease;
+    z-index: 5;
+}
+
+.showResult p {
+    height: 200px;
+    width: 200px;
+    background-color: var(--primary60);
+    border-radius: 5px;
+    color: var(--black0);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
 }
 
 .listingRecap {
@@ -132,7 +156,6 @@ main {
     height: 400px;
     width: 350px;
     border-radius: 10px;
-    background-image: url('../../assets/img/background/mobile/backgroundMobile.svg');
     background-color: var(--black0);
     background-repeat: no-repeat;
     background-position: center;
@@ -148,7 +171,7 @@ main {
 
 .formContentTitle h3 {
     text-align: center;
-    color: var(--primary100);
+    color: var(--primary80);
 }
 
 /* Form */
@@ -180,12 +203,9 @@ form {
     border: 2px solid var(--primary80);
 }
 
-select {
-    margin-top: 1rem;
-}
-
 .formName {
     width: 90%;
+    margin-bottom: .25rem;
 }
 
 .formName input:first-child {
@@ -208,10 +228,9 @@ select {
 }
 
 .registerButton button {
-    width: 130px;
     padding: .5rem 1rem;
     text-align: center;
-    background: var(--primary100);
+    background: var(--primary80);
     border-radius: 10px;
     font-size: 1rem;
     font-weight: 600;

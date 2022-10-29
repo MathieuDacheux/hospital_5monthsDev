@@ -8,6 +8,7 @@ define('HEAD_TITLE', [
 '',
 ''
 ]);
+
 define('HEAD_DESCRIPTION', [
 'Bienvenue sur le site de CareUs, votre centre de soins proche de vous',
 '',
@@ -22,3 +23,7 @@ define('HOST', 'localhost');
 define('USER', 'twinkiies');
 define('PASSWORD', 'Dr3tqvmkl2prcg80*');
 define('CHARSET', 'utf8');
+
+// Tableau d'erreurs
+
+$errorsRegistration = [];

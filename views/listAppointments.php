@@ -34,9 +34,6 @@
     <!-- Listage des clients  -->
     <div class="containerSubject">
         <div class="containerTitle flexCenterCenter">
-            <div class="containerSearch">
-                <input type="text" placeholder="Rechercher un patient">
-            </div>
             <div class="containerAdd flexCenterCenter">
                 <i class="fa-solid fa-plus"></i>
             </div>
