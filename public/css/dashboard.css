@@ -7,6 +7,10 @@ main {
     justify-content: center;
 }
 
+.hidden {
+    display: none;
+}
+
 /* Settings container Recap */
 
 .containerRecap {
@@ -22,22 +26,33 @@ main {
 
 .containerSubject {
     width: 100%;
-    height: 600px;
+    height: 550px;
     border-radius: 10px;
     margin-bottom: 1rem;
-    overflow-y: scroll;
 }
 
 .income {
     background-color: var(--primary40);
 }
 
+.containerGraph {
+    width: 95%;
+    height: calc(100% - 50px);
+    background-color: var(--hr);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .clients {
     background-color: var(--primary60);
+    overflow-y: scroll;
 }
 
 .employees {
     background-color: var(--primary80);
+    overflow-y: scroll;
 }
 
 .containerTitle {
@@ -49,7 +64,6 @@ main {
     width: 100%;
     height: auto;
     padding: .5rem;
-
 }
 
 .listingRecap {

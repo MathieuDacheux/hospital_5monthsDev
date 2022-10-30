@@ -85,7 +85,7 @@
                 <div class="listingRecap flexCenterBetween">
                     <div class="containerInformations">
                         <div class="containerPicture">
-                            <img src="https://www.freeiconspng.com/uploads/patient-icon-png-19.png" alt="">
+                            <img src="https://www.freeiconspng.com/uploads/patient-icon-png-19.png" alt="Icône représentant une personne avec un bandage sur le bras gauche">
                         </div>
                         <div class="containerName">
                             <p><?= $information->lastname ?> <?= $information->firstname ?></p>

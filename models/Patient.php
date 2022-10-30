@@ -268,6 +268,15 @@ class Patient {
         }
     }
 
+    // Returns all patients from the last 7 days sorted by day
+    public static function getPatientsFromSevenLastDay () :array {
+        $databaseConnection = Database::getPDO();
+        $query = $databaseConnection->prepare('SELECT `creationDate` FROM `patients` WHERE `creationDate` BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW() ORDER BY `creationDate` DESC ;');
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_OBJ);
+        return $result;
+    }
+
     /**
      * Retourne les informations du patient
      * @return array

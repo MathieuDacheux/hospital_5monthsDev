@@ -61,7 +61,7 @@
                 <div class="listingRecap flexCenterBetween">
                     <div class="containerInformations">
                         <div class="containerPicture">
-                            <img src="https://www.freeiconspng.com/uploads/patient-icon-png-19.png" alt="">
+                            <img src="https://www.freeiconspng.com/uploads/patient-icon-png-19.png" alt="Icône représentant une personne avec un bandage sur le bras gauche">
                         </div>
                         <div class="containerName">
                             <p><?= $information->firstname ?> <?= $information->lastname ?> le <?= date_format(date_create($information->dateHour), 'd/m') ?> à <?= date_format(date_create($information->dateHour), 'H:i') ?>h</p>

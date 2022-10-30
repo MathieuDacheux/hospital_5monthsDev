@@ -36,7 +36,7 @@
         </div>
     </footer>
     <!-- CDN Font Awesome -->
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <script src="https://kit.fontawesome.com/b274073d83.js" crossorigin="anonymous"></script>
 
 </body>
