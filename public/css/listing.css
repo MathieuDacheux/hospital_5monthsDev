@@ -134,6 +134,14 @@ main {
     color: var(--black100);
 }
 
+.containerMore div:first-child a i {
+    color: var(--error80);
+}
+
+.containerMore div:last-child {
+    margin-left: 1.5rem;
+}
+
 
 @media screen and (min-width: 1000px) {
     main {

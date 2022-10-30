@@ -135,7 +135,7 @@ class Appointment {
         // Connexion à la base de données
         $databaseConnection = Database::getPDO();
         // Requête SQL
-        $query = $databaseConnection->prepare('SELECT `patients`.`lastname`, `patients`.`firstname`, `patients`.`id`, `appointments`.`dateHour` FROM `appointments` LEFT JOIN `patients` ON `appointments`.`idPatients` = `patients`.`id` ORDER BY `dateHour` ASC LIMIT :numberPerPage OFFSET :offset ;');
+        $query = $databaseConnection->prepare('SELECT `patients`.`lastname`, `patients`.`firstname`, `appointments`.`dateHour`, `appointments`.`id`, `appointments`.`idPatients` FROM `appointments` LEFT JOIN `patients` ON `appointments`.`idPatients` = `patients`.`id` ORDER BY `dateHour` ASC LIMIT :numberPerPage OFFSET :offset ;');
         $query->bindValue(':numberPerPage', 9, PDO::PARAM_INT);
         $query->bindValue(':offset', (Appointment::setPage() - 1) * 10, PDO::PARAM_INT);
         $query->execute();
@@ -160,20 +160,17 @@ class Appointment {
     }
 
     /**
-     * Vérifie si l'ID du patient existe
+     * Vérifie si l'ID du patient existe dans la base de données
      * @return bool
      */
-    public static function verifyIfIdExists () :bool {
-        if (Database::validationInput($_GET['id'] , REGEX_ID) == true) {
-            $databaseConnection = Database::getPDO();
-            $queryResult = $databaseConnection->prepare('SELECT `id` FROM `appointments` WHERE `id` = '.$_GET['id'].' ;');
-            $queryResult->execute();
-            $result = $queryResult->fetch(PDO::FETCH_OBJ);
-            if ($result != null) {
-                return true;
-            } else {
-                return false;
-            }
+    public static function verifyIfIdExists ($id) :bool {
+        $databaseConnection = Database::getPDO();
+        $query = $databaseConnection->prepare('SELECT `id` FROM `patients` WHERE `id` = :id');
+        $query->bindValue(':id', $id, PDO::PARAM_INT);
+        $query->execute();
+        $result = $query->fetch(PDO::FETCH_OBJ);
+        if ($result != null) {
+            return true;
         } else {
             return false;
         }
@@ -200,7 +197,7 @@ class Appointment {
     //********************************************** **********************************************/
 
     /**
-     * Supprime un rendez-vous
+     * Supprime un rendez-vous en fonction de l'ID d'un patient
      * @return bool
      */
     public static function deleteAppointmentByPatient () :bool {
@@ -212,5 +209,17 @@ class Appointment {
         } else {
             return false;
         }
+    }
+
+    /**
+     * Supprime un rendez-vous en fonction de l'ID d'un rendez-vous
+     * @return bool
+     */
+    public static function deleteAppointmentById () :bool {
+        $databaseConnection = Database::getPDO();
+        $queryResult = $databaseConnection->prepare('DELETE FROM `appointments` WHERE `id` = :id ;');
+        $queryResult->bindValue(':id', $_GET['id'], PDO::PARAM_INT);
+        $queryResult->execute();
+        return true;
     }
 }

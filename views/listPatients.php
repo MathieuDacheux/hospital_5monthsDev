@@ -92,8 +92,11 @@
                         </div>
                     </div>
                     <div class="containerMore flexCenterCenter">
+                    <div class="containerDelete">
+                            <a href="/patients?id=<?= $information->id ?>"><i class="fa-solid fa-trash"></i></a>
+                        </div>
                         <div class="containerPlus flexCenterCenter">
-                            <a href="/profil?id=<?= $information->id ?>"><i class="fa-regular fa-eye"></i></a>
+                            <a href="/profil?id=<?= $information->idPatients ?>"><i class="fa-regular fa-eye"></i></a>
                         </div>
                     </div>      
                 </div>
