@@ -8,6 +8,7 @@ require_once(__DIR__.'/../helpers/functions.php');
 // Appel des models
 require_once(__DIR__.'/../models/Database.php');
 require_once(__DIR__.'/../models/Patient.php');
+require_once(__DIR__.'/../models/Appointment.php');
 
 // Appel des fonctions
 
@@ -49,16 +50,17 @@ if (isset ($_GET['search'])) {
 if (isset ($_GET['id'])) {
     if (Database::validationInput($_GET['id'], REGEX_ID) == true) {
         $id = $_GET['id'];
-        if (Appointment::verifyIfIdExists($id) == true) {
-            Appointment::deleteAppointmentById($id);
-            header('Location: /rendez-vous');
+        if (Patient::verifyIfIdExists() == true) {
+            Appointment::deleteAppointmentByPatient();
+            Patient::deletePatient();
+            header('Location: /patients');
             exit();         
         } else {
-            header('Location: /rendez-vous');
+            header('Location: /patients');
             exit();         
         }
     } else {
-        header('Location: /rendez-vous');
+        header('Location: /patients');
         exit();
     }
 }

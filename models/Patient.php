@@ -224,6 +224,7 @@ class Patient {
         // Connexion à la base de données
         $databaseConnection = Database::getPDO();
         // Requête SQL
+        // Select * from patients and id from appointments limit 10 offset 0
         $query = $databaseConnection->prepare('SELECT * FROM `patients` ORDER BY `id` DESC LIMIT :numberPerPage OFFSET :offset');
         $query->bindValue(':numberPerPage', 9, PDO::PARAM_INT);
         $query->bindValue(':offset', (Patient::setPage() - 1) * 10, PDO::PARAM_INT);

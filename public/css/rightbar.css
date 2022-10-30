@@ -7,7 +7,7 @@
     /* Right container */
     .containerRight {
         display: block;
-        width: 250px;
+        width: 275px;
         height: 100vh;
         border-left: 1px solid var(--hr);
     }
