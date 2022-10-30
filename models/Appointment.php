@@ -195,6 +195,24 @@ class Appointment {
         }
     }
 
+    /**
+     * Retourne les informations d'un rendez-vous en AJAX
+     * @param mixed $name
+     * 
+     * @return array
+     */
+    public static function searchByName ($name) :array {
+        // Connexion à la base de données
+        $databaseConnection = Database::getPDO();
+        // Requête SQL
+        $query = $databaseConnection->prepare('SELECT `patients`.`lastname`, `patients`.`firstname`, `patients`.`id`, `appointments`.`dateHour` FROM `appointments` LEFT JOIN `patients` ON `appointments`.`idPatients` = `patients`.`id` WHERE `patients`.`lastname` LIKE :name ORDER BY `dateHour` ASC ;');
+        $query->bindValue(':search', $name, PDO::PARAM_STR);
+        $query->execute();
+        // Récupération du résultat
+        $result = $query->fetchAll(PDO::FETCH_OBJ);
+        return $result;
+    }
+
     //********************************************** **********************************************/
     //******************************************* DELETE ******************************************/
     //********************************************** **********************************************/

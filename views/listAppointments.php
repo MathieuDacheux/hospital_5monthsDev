@@ -50,6 +50,11 @@
     <!-- Listage des clients  -->
     <div class="containerSubject">
         <div class="containerTitle flexCenterCenter">
+            <div class="containerSearch hidden">
+                <form action="/rendez-vous?search=<?= isset($_GET['search']) ? $_GET['search'] : '' ?>">
+                    <input class="searchBar" type="text" name="search" value="<?= (isset($name)) ? $name : '' ?>" pattern="<?= REGEX_NAME ?>" placeholder="Rechercher un patient">
+                </form>
+            </div>
             <div class="containerAdd flexCenterCenter">
                 <i class="fa-solid fa-plus"></i>
             </div>

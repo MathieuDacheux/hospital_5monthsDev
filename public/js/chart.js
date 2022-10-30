@@ -13,7 +13,6 @@ let patientsFromLastSevenDays = JSON.parse(document.querySelector('.hidden').tex
             let day = date.getDay();
             patientsPerDay[day]++;
         }
-        console.log(patientsPerDay);
         // Create chart
         const canvas = document.querySelector('.chartPatients');
         const ctx = canvas.getContext('2d');

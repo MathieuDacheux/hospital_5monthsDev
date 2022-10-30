@@ -289,8 +289,14 @@ class Patient {
         // Récupération du résultat
         $resultInformations = $result->fetchAll(PDO::FETCH_OBJ);
         return $resultInformations;
-    }
+    } 
 
+    /**
+     * Affichage dynamique des informations du patient en AJAX
+     * @param mixed $name
+     * 
+     * @return array
+     */
     public static function searchByName ($name) :array {
         // Connexion à la base de données
         $databaseConnection = Database::getPDO();
