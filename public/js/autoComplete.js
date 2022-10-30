@@ -29,12 +29,3 @@ searchInput.addEventListener('input', function() {
         renderResult.style.display = 'block';
     }
 });
-
-const thoushandDivision = () => {
-    let result = 0;
-    for (let i = 0; i < 10000000; i++) {
-        result += Math.floor(Math.random() * (6500 - 4500 + 1)) + 4000;
-    }
-    resultFinal = result / 10000000;
-    console.log(resultFinal);
-}

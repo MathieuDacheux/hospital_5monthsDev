@@ -33,22 +33,6 @@ $patientsList = Appointment::getByTen();
 // Récupération de la liste de tout les patients pour le select
 $patientsAll = Patient::getAll();
 
-if (isset ($_GET['search'])) {
-    if (Database::validationInput($_GET['search'], REGEX_NAME) == true) {
-        $name = $_GET['search'];
-        var_dump($name);
-        if (Patient::searchByName($name) == true) {
-            $patientsList = Patient::searchByName($name);
-        } else {
-            header('Location: /rendez-vous');
-            exit();
-        }
-    } else {
-        header('Location: /rendez-vous');
-        exit();
-    }
-}
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Instanciation de la classe RegisterAppointement
     $registerAppointement = new Appointment('dateHour', 'id');
