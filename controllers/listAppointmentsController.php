@@ -36,7 +36,6 @@ $patientsAll = Patient::getAll();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Instanciation de la classe RegisterAppointement
     $registerAppointement = new Appointment('dateHour', 'id');
-    var_dump($registerAppointement->getDate());
     if (Database::validationInput($registerAppointement->getDate(), REGEX_DATETIME) == false ) {
         $errorsRegistration['dateHour'] = 'La date et l\'heure ne sont pas valides';
     }

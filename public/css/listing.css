@@ -142,7 +142,7 @@ main {
 
 @media screen and (min-width: 1200px) {
     main {
-        width: calc(100vw - 425px);
+        width: calc(100vw - 475px);
         height: 100vh;
     }
 }
@@ -263,10 +263,6 @@ form {
 }
 
 @media screen and (min-width: 1000px) {
-    main {
-        height: 100vh;
-        width: calc(100vw - 200px);
-    }
     .containerSearch {
         display: block;
         position: absolute;
@@ -297,10 +293,6 @@ form {
 }
 
 @media screen and (min-width: 1200px) {
-    main {
-        height: 100vh;
-        width: calc(100vw - 425px);
-    }
     .containerSearch {
         display: block;
         position: absolute;
