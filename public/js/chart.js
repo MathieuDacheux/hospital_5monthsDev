@@ -15,7 +15,13 @@ let patientsFromLastSevenDays = JSON.parse(document.querySelector('.hidden').tex
         }
         console.log(patientsPerDay);
         // Create chart
-        const ctx = document.querySelector('.chartPatients').getContext('2d');
+        const canvas = document.querySelector('.chartPatients');
+        const ctx = canvas.getContext('2d');
+        canvas.style.width ='100%';
+        canvas.style.height='100%';
+        // ...then set the internal size to match
+        canvas.width  = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
         const myChart = new Chart(ctx, {
             type: 'bar',
             data: {
@@ -24,7 +30,7 @@ let patientsFromLastSevenDays = JSON.parse(document.querySelector('.hidden').tex
                     label: 'Patients',
                     data: patientsPerDay,
                     backgroundColor: 'rgba(82, 117, 236, 1)',
-                    borderColor: 'rgba(227, 231, 247, 1)',
+                    borderColor: 'rgba(82, 117, 236, 1)',
                     borderWidth: 1
                 }]
             },

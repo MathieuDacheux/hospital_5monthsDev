@@ -2,7 +2,7 @@
     <div class="containerRecap">
         <div class="containerSubject flexCenterCenterColumn income">
             <div class="containerGraph">
-                <canvas width="300" height="300" class="chartPatients"></canvas>
+                <canvas class="chartPatients"></canvas>
             </div>
         </div>
     </div>

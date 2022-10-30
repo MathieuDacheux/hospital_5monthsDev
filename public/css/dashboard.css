@@ -19,7 +19,6 @@ main {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
-
 }
 
 /* Settings container Subject */
@@ -36,7 +35,7 @@ main {
 }
 
 .containerGraph {
-    width: 95%;
+    width: calc(100% - 50px);
     height: calc(100% - 50px);
     background-color: var(--hr);
     border-radius: 5px;
