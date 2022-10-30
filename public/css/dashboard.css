@@ -145,7 +145,7 @@ main {
 /* Media queries in desktop */
 @media screen and (min-width: 1200px) {
     main {
-        width: calc(100vw - 425px);
+        width: calc(100vw - 475px);
         overflow: hidden;
         padding: 0rem .5rem;
     }

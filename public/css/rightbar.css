@@ -7,7 +7,7 @@
     /* Right container */
     .containerRight {
         display: block;
-        width: 225px;
+        width: 250px;
         height: 100vh;
         border-left: 1px solid var(--hr);
     }
@@ -61,6 +61,13 @@
 
     .taskEvent .event, .calendarEvent .event {
         width: calc(100% - 50px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .date, .checkbox {
+        width: 50px;
     }
 
     .taskEvent .event p ,.calendarEvent .event p {
