@@ -1,0 +1,119 @@
+main {
+    width: 100vw;
+    height: calc(100vh - 75px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Form content */
+
+.formContent {
+    height: 500px;
+    width: 350px;
+    border-radius: 10px;
+    background-color: var(--black0);
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 2;
+    transition: all .3s ease;
+    border: 2px solid var(--primary60);
+}
+
+/* Title */
+
+.formContentTitle {
+    height: 75px;
+}
+
+.formContentTitle h3 {
+    text-align: center;
+    color: var(--primary80);
+}
+
+/* Form */
+
+form {
+    height: calc(100% - 75px);
+}
+
+/* Input des forms */
+
+.formInput {
+    height: calc(100% - 50px);
+}
+
+.formInput input, select {
+    width: 90%;
+    padding: .70rem .5em;
+    border-radius: 5px;
+    border: 2px solid var(--black40);
+    color: var(--black100);
+}
+
+.formInput input::placeholder, select::placeholder {
+    color: var(--black80);
+}
+
+.formInput input:focus, select {
+    outline: none;
+    border: 2px solid var(--primary80);
+}
+
+.formInput input[type="datetime-local"] {
+    width: 90%;
+}
+
+.formName {
+    width: 90%;
+    margin-bottom: .25rem;
+}
+
+.formName input:first-child {
+    width: 99%;
+}
+
+.formName select:first-child {
+    width: 99%;
+}
+
+#id {
+    width: 100%;
+}
+
+.formName .errorMessage {
+    width: 99%;
+    margin: 0;
+    text-align: center;
+}
+
+/* Submit button */
+
+.registerButton {
+    height: 50px;
+}
+
+.registerButton button {
+    padding: .5rem 1rem;
+    text-align: center;
+    background: var(--primary80);
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: 0;
+    color: var(--black0);
+}
+
+@media screen and (min-width: 1000px) {
+    main {
+        height: 100vh;
+        width: calc(100vw - 200px);
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    main {
+        height: 100vh;
+        width: calc(100vw - 475px);
+    }
+}

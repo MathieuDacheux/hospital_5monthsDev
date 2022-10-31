@@ -54,16 +54,16 @@
     <?php if (isset($confirmation)) : ?>
         <?php if($confirmation == true) :?>
         <div class="showResult visible">
-            <p class="resultFormText">Le données ont bien été ajoutées</p>
+            <p class="resultFormText goodResult">Le données ont bien été ajoutées</p>
         </div>
         <?php elseif ($confirmation == false) : ?>
         <div class="showResult visible">
-            <p class="resultFormText">Les données fournies ne sont pas conformes</p>
+            <p class="resultFormText badResult">Les données fournies ne sont pas conformes</p>
         </div>
         <?php endif; ?>
     <?php endif; ?>
     <?php if (isset($isExist)) : ?>
-        <?= ($isExist == true) ? '<div class="showResult visible"><p class="resultFormText">Les données sont déjà présents dans la base</p></div>' : '' ;?>
+        <?= ($isExist == true) ? '<div class="showResult visible"><p class="resultFormText badResult">Les données sont déjà présents dans la base</p></div>' : '' ;?>
     <?php endif; ?>
 
     <!-- Listage des clients  -->
