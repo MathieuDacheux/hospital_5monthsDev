@@ -137,6 +137,7 @@ main {
     background-position: center;
     z-index: 2;
     transition: all .3s ease;
+    border: 2px solid var(--primary80);
 }
 
 /* Title */
@@ -232,6 +233,6 @@ select {
 @media screen and (min-width: 1200px) {
     main {
         height: 100vh;
-        width: calc(100vw - 425px);
+        width: calc(100vw - 475px);
     }
 }
